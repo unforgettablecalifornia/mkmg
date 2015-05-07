@@ -2,7 +2,7 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:56:42
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-07 13:59:56
+* @Last Modified time: 2015-05-07 14:39:48
 */
 
 'use strict';
@@ -69,7 +69,7 @@
                 };
                 var _setLover=function(lover){
                     _lover=_lover;
-                }
+                };
                 this.getArtist=_getArtist;
                 this.setArtist=_setArtist;
                 this.getLover=_getLover; 
@@ -77,5 +77,7 @@
             }
         );
 }));
+//service和factory都是服务工厂，负责提供服务；
+//provider是一个提供者，$get负责提供服务工厂；
 
 
