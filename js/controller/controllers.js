@@ -2,7 +2,7 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:56:57
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-06 11:58:24
+* @Last Modified time: 2015-05-07 13:55:41
 */
 
 'use strict';
@@ -16,11 +16,12 @@
 
                 }
             ]).
-        controller('detailController',['$scope','$routeParams','_phone',
-                function($scope,$routeParams,_phone){
+        controller('detailController',['$scope','$routeParams','phoneProvider','phoneFactory','phoneService',
+                function($scope,$routeParams,phoneProvider,phoneFactory,phoneService){
                     $scope.id=$routeParams.id;
-                    console.log(_phone);
+                    console.log(phoneService,phoneService.getLover());
+                    phoneService.setLover('zttztt');
                 }
-            ])
+            ]);
 
 }));
