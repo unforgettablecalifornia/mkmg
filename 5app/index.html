@@ -1,0 +1,94 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link href="style/reset.css" rel="stylesheet" type="text/css">
+<link href="style/css.css" rel="stylesheet" type="text/css">
+<title>选择素材</title>
+<script>
+(function (doc, win) {
+  var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+    };
+ 
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+
+<body>
+<header>
+<div class="header">
+<a href="javascript:;" class="a-back"><span></span><b>返回</b></a>
+<h2>选择素材</h2>
+</div>
+<section>
+<div class="fodder_list">
+<!--默认模版-->
+<div class="g-col first">
+<a href="javascript:;">
+	<div class="g-item-image"><img src="images/img-default.jpg"></div>
+    <div class="g-item-title f12">自定义</div>
+</a>
+</div>
+<!--默认模版END-->
+<div class="g-col">
+<a href="javascript:;">
+	<div class="g-item-image"><img src="images/img01.jpg"></div>
+    <div class="g-item-title f12">莫负时光</div>
+</a>
+</div>
+<div class="g-col">
+<a href="javascript:;">
+	<div class="g-item-image"><img src="images/img01.jpg"></div>
+    <div class="g-item-title f12">莫负时光</div>
+</a>
+</div>
+<div class="g-col">
+<a href="javascript:;">
+	<div class="g-item-image"><img src="images/img01.jpg"></div>
+    <div class="g-item-title f12">莫负时光</div>
+</a>
+</div>
+<div class="g-col">
+<a href="javascript:;">
+	<div class="g-item-image"><img src="images/img01.jpg"></div>
+    <div class="g-item-title f12">莫负时光</div>
+</a>
+</div>
+<div class="g-col">
+<a href="javascript:;">
+	<div class="g-item-image"><img src="images/img01.jpg"></div>
+    <div class="g-item-title f12">莫负时光</div>
+</a>
+</div>
+<div class="g-col">
+<a href="javascript:;">
+	<div class="g-item-image"><img src="images/img01.jpg"></div>
+    <div class="g-item-title f12">莫负时光</div>
+</a>
+</div>
+<div class="g-col">
+<a href="javascript:;">
+	<div class="g-item-image"><img src="images/img01.jpg"></div>
+    <div class="g-item-title f12">莫负时光</div>
+</a>
+</div>
+<div class="g-col">
+<a href="javascript:;">
+	<div class="g-item-image"><img src="images/img01.jpg"></div>
+    <div class="g-item-title f12">莫负时光</div>
+</a>
+</div>
+</div>
+</section>
+</header>
+</body>
+</html>

@@ -2,29 +2,42 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:49:10
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-07 14:57:33
+* @Last Modified time: 2015-05-14 18:10:58
 */
 
 'use strict';
 ;(function(root,factory){
     factory.call(root,angular);
 }(this,function(angular){
-    var app=angular.module('app',['ngRoute','appControllers','appServices']);
-    app.config(['$routeProvider',
-            function($routeProvider,phoneProvider){
-                $routeProvider.
-                    when('/home',{
-                        templateUrl:'partials/home.html',
-                        controller:'homeController'
-                    }).
-                    when('/detail/:id',{
-                        templateUrl:'partials/detail.html',
-                        controller:'detailController'
-                    }).
-                    otherwise({
-                        redirectTo:'/home'
-                    });
-            }
+    angular.module('app',['ngRoute','appControllers','appServices']).
+        config(['$routeProvider','$provide','$locationProvider',config]).
+        run(['$templateCache',templateCache]);
 
-        ]);
+    function templateCache($templateCache){
+        $templateCache.put('partials/select.html');
+        $templateCache.put('partials/music.html');
+        $templateCache.put('partials/text.html');
+        $templateCache.put('partials/make.html');
+    }
+
+    function config($routeProvider,$provide,$locationProvider){
+        $routeProvider.
+            when('/',{
+                templateUrl:'partials/select.html',
+                controller:'selectController'
+            }).
+            when('/make/:id',{
+                templateUrl:'partials/make.html',
+                controller:'makeController'
+            }).
+            when('/make/:id/music',{
+                templateUrl:'partials/music.html',
+                controller:'musicController'
+            }).
+            when('/make/:id/text',{
+                templateUrl:'partials/text.html',
+                controller:'textController'
+            });
+        
+    }
 }));

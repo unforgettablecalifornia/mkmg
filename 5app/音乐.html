@@ -1,0 +1,61 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link href="style/reset.css" rel="stylesheet" type="text/css">
+<link href="style/css.css" rel="stylesheet" type="text/css">
+<title>发布</title>
+<script>
+(function (doc, win) {
+  var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+    };
+ 
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+
+<body class="bj_white">
+<header>
+<div class="header">
+<a href="javascript:;" class="a-back"><span></span><b>返回</b></a>
+<h2>选择素材</h2>
+<a href="javascript:;" class="a-r"><span>完成</span></a>
+</div>
+
+</header>
+<section>
+	<div class="music-list">
+   	 	<dl>
+        	<dd>无音乐</dd>
+        </dl>
+    	<dl>
+        	<dt>动感</dt>
+            <dd>Hubble popo</dd>
+            <dd>Hubble popo</dd>
+            <dd>Hubble popo</dd>
+            <dd>Hubble popo</dd>
+            <dd>Hubble popo</dd>
+        </dl>
+        <dl>
+        	<dt>动感</dt>
+            <dd>Hubble popo</dd>
+            <dd>Hubble popo</dd>
+            <dd>Hubble popo</dd>
+            <dd>Hubble popo</dd>
+            <dd>Hubble popo</dd>
+        </dl>
+    </div>
+
+</section>
+
+</body>
+</html>

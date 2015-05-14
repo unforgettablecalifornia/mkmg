@@ -1,0 +1,15 @@
+<header>
+    <div class="header">
+        <a ng-click="back()" class="a-back"><span></span><b>{{buttonLeft}}</b></a>
+        <h2>{{name}}</h2>
+        <a ng-click="yes();back();" class="a-r"><span>{{buttonRight}}</span></a>
+    </div>
+</header>
+<section>
+    <div class="music-list">
+        <dl ng-repeat="music in musics">
+            <dt>{{music.type}}</dd>
+            <dd ng-repeat="item in music.list" ng-click="setMusic(item.id)">{{item.musicName}}</dd>
+        </dl>
+    </div>
+</section>

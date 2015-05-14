@@ -1,0 +1,85 @@
+<header>
+    <div class="header">
+        <a href="#/" class="a-back"><span></span><b>{{buttonLeft}}</b></a>
+        <h2>{{name}}</h2>
+        <a href="javascript:;" class="a-r"><span>{{buttonRight}}</span></a>
+    </div>
+</header>
+<section>
+    <div class="stage">
+        <div class="s-img" ng-repeat="img in imgs">
+            <img ng-src="{{img.src}}">
+        </div>
+    </div>
+</section>
+<footer>
+    <div class="stage-nav">
+        <div class="s-control-btn" ng-click="control()"><i></i></div>
+        <div ng-class="{'s-c-b-list':true,hide:!swift}">
+            <div class="s-n-box">
+                <div>
+                    <span>
+                        <em class="copy"></em>
+                        复制
+                    </span>
+                </div>
+                <div>
+                    <span>
+                        <em class="del"></em>
+                        删除
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div ng-class="{'s-c-b-list':true,hide:swift}">
+            <div class="s-edit-btn">
+                <div>
+                    <a ng-href="#/make/{{id}}/text">
+                        <span>
+                            <em class="text"></em>
+                            文本
+                        </span>
+                    </a>
+                </div>
+                <div>
+                    <span>
+                        <em class="bj"></em>
+                        背景
+                    </span>
+                </div>
+                <div>
+                    <span>
+                        <em class="img"></em>
+                        图片
+                    </span>
+                </div>
+                <div>
+                    <span>
+                        <em class="draw"></em>
+                        涂抹
+                    </span>
+                </div>
+                <div>
+                    <span>
+                        <em class="add_page"></em>
+                        加页
+                    </span>
+                </div>
+                <div>
+                    <a ng-href="#/make/{{id}}/music">
+                        <span>
+                        <em class="music"></em>
+                        音乐
+                    </span>
+                    </a>
+                </div>
+                <div>
+                    <span>
+                        <em class="copy"></em>
+                        按钮
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
