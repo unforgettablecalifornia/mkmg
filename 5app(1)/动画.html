@@ -1,0 +1,123 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link href="style/reset.css" rel="stylesheet" type="text/css">
+<link href="style/css.css" rel="stylesheet" type="text/css">
+<title>制作</title>
+<script>
+(function (doc, win) {
+  var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+    };
+ 
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+
+<body>
+<header>
+<div class="header">
+<a href="javascript:;" class="a-back"><span></span><b>返回</b></a>
+<h2>选择素材</h2>
+<a href="javascript:;" class="a-r"><span>预览</span></a>
+</div>
+
+</header>
+<section>
+<div class="stage">
+	<div class="s-img">
+    	<img src="images/img03.jpg">
+        <div class="Line_frame">
+        	<span class="left_t"></span>
+            <span class="left_b"></span>
+            <span class="right_t"></span>
+            <span class="right_b"></span>
+            <span class="center_t"></span>
+            <span class="center_b"></span>
+        </div>
+        <div class="s-img-layer">
+        	<div>动画</div>
+            <div>删除</div>
+        </div>
+    </div>
+    <div class="s-img">
+    	<img src="images/img02.jpg">
+    </div>
+  <div class="s-img">
+    	<img src="images/img02.jpg">
+    </div>
+</div>
+</section>
+<footer>
+	<div class="animation-operate">
+    	<div class="animation-parameters">
+        	<div class="item">
+            	<div class="title">
+            	动画时间
+            </div>
+            	<div class="animation-parameters-set">
+            		<div class="set-line">
+                    	<div class="set-btn"></div>
+                    </div>
+                    <div class="values">
+                    <span>0</span> S
+                    </div>
+            	</div>
+            </div>
+            <div class="item">
+            	<div class="title">
+            	延时时间
+          	    </div>
+            	<div class="animation-parameters-set">
+            		<div class="set-line">
+                    	<div class="set-btn"></div>
+                    </div>
+                    <div class="values">
+                    <span>0</span> S
+                    </div>
+            	</div>
+            </div>
+        </div>
+		<div class="animation-nav-btn">
+    	<div class="clear-animation">
+        	<span></span>
+            <em>清除动画</em>
+        </div>
+        <div class="animation-btn-list">
+        	<div class="ani-btn">
+                <div>
+                	<span class="fadeIn"></span>
+            		<em>淡入</em>
+                </div>
+                <div>
+                	<span class="fadeOut"></span>
+            		<em>淡出</em>
+                </div>
+                <div>
+                	<span class="amplify"></span>
+            		<em>放大</em>
+                </div>
+                <div>
+                	<span class="rotation"></span>
+            		<em>旋转</em>
+                </div>
+                <div>
+                	<span class="Shake"></span>
+            		<em>抖动</em>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</footer>
+</body>
+</html>

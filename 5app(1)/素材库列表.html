@@ -1,0 +1,70 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link href="style/reset.css" rel="stylesheet" type="text/css">
+<link href="style/css.css" rel="stylesheet" type="text/css">
+<title>发布</title>
+<script>
+(function (doc, win) {
+  var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+    };
+ 
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+
+<body>
+<header>
+<div class="header">
+<a href="javascript:;" class="a-back"><span></span><b>返回</b></a>
+<h2>素材库</h2>
+</div>
+
+</header>
+<section class="bg_f6f6f5">
+	<div class="material-list">
+    	<div class="nav-bj">
+    	<nav>
+        	<div>全部</div>
+            <div>底纹</div>
+            <div class="act">底纹</div>
+            <div>底纹</div>
+            <div>底纹</div>
+            <div>底纹</div>
+            <div>底纹</div>
+            <div>底纹</div>
+            <div>底纹</div>
+            <div>底纹</div>
+        </nav>
+        </div>
+        <div class="material-list-img">
+        	<ul>
+            	<li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+                <li><img src="images/img06.jpg"></li>
+             </ul>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

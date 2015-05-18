@@ -2,7 +2,7 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:49:10
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-14 18:10:58
+* @Last Modified time: 2015-05-18 17:21:42
 */
 
 'use strict';
@@ -37,6 +37,14 @@
             when('/make/:id/text',{
                 templateUrl:'partials/text.html',
                 controller:'textController'
+            }).
+            when('/make/:id/lottery',{
+                templateUrl:'partials/lottery.html',
+                controller:'lotteryController'
+            }).
+            when('/make/:id/hyperLink',{
+                templateUrl:'partials/hyperLink.html',
+                controller:'hyperLinkController'
             });
         
     }

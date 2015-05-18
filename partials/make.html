@@ -9,6 +9,18 @@
     <div class="stage">
         <div class="s-img" ng-repeat="img in imgs">
             <img ng-src="{{img.src}}">
+            <div ng-class="{hide:true}" class="Line_frame">
+                <span class="left_t"></span>
+                <span class="left_b"></span>
+                <span class="right_t"></span>
+                <span class="right_b"></span>
+                <span class="center_t"></span>
+                <span class="center_b"></span>
+            </div>
+            <div ng-class="{hide:true}" class="s-img-layer">
+                <div>动画</div>
+                <div>删除</div>
+            </div>
         </div>
     </div>
 </section>
@@ -54,10 +66,12 @@
                     </span>
                 </div>
                 <div>
-                    <span>
-                        <em class="draw"></em>
-                        涂抹
-                    </span>
+                    <a ng-href="#/make/{{id}}/lottery">
+                        <span>
+                            <em class="draw"></em>
+                            涂抹
+                        </span>
+                    </a>
                 </div>
                 <div>
                     <span>
@@ -74,10 +88,12 @@
                     </a>
                 </div>
                 <div>
-                    <span>
-                        <em class="copy"></em>
-                        按钮
-                    </span>
+                    <a ng-href="#/make/{{id}}/hyperLink">
+                        <span>
+                            <em class="copy"></em>
+                            按钮
+                        </span>
+                    </a>
                 </div>
             </div>
         </div>

@@ -1,0 +1,52 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link href="style/reset.css" rel="stylesheet" type="text/css">
+<link href="style/css.css" rel="stylesheet" type="text/css">
+<title>发布</title>
+<script>
+(function (doc, win) {
+  var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+    };
+ 
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+
+<body>
+<header>
+<div class="header">
+<a href="javascript:;" class="a-back"><span></span><b>返回</b></a>
+
+<a href="javascript:;" class="a-r"><span>发布</span></a>
+</div>
+
+</header>
+<section>
+<div class="published">
+<input type="text" placeholder="标题" class="p-title">
+<div class="p-box">
+<div class="up_img">
+<input type="file" accept="image/*;capture=camera" class="this_img">
+
+</div>
+<div class="share">
+<textarea class="p-textarea" placeholder="分享信息"></textarea>
+</div>
+</div>
+</div>
+
+</section>
+
+</body>
+</html>

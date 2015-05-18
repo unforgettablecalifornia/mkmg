@@ -2,7 +2,7 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:56:57
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-14 18:13:08
+* @Last Modified time: 2015-05-18 17:13:44
 */
 
 'use strict';
@@ -183,6 +183,19 @@
                         if($scope.text){
                             magaProvider.texts.push($scope.text);
                         }
+                    };
+                }
+            ]).
+        controller('lotteryController',['$scope','$routeParams','magaProvider','$window','$rootScope',
+                function($scope,$routeParams,magaProvider,$window,$rootScope){
+                    $rootScope.root.bk_color_swift=true;
+                    $scope.buttonLeft="返回";
+                    $scope.buttonRight="完成";
+                    $scope.back=function(){
+                        $window.history.back();
+                    };
+                    $scope.yes=function(){
+                        $scope.back();
                     };
                 }
             ]);

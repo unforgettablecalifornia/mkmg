@@ -1,0 +1,62 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link href="style/reset.css" rel="stylesheet" type="text/css">
+<link href="style/css.css" rel="stylesheet" type="text/css">
+<title>制作文本</title>
+<script>
+(function (doc, win) {
+  var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+    };
+ 
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+
+<body class="bj_white">
+<header>
+<div class="header">
+<a href="javascript:;" class="a-back"><span></span><b>返回</b></a>
+<h2>编辑文本</h2>
+<a href="javascript:;" class="a-r"><span>完成</span></a>
+</div>
+
+</header>
+<section class="bg_f6f6f5">
+<div class="text_area">
+	<textarea class="textarea"  style="height: 200px;" placeholder="请输入您要编辑的内容"></textarea>
+</div>
+
+</section>
+<footer>
+<div class="edit_text_box">
+    <div class="display_area">
+    	<div class="animation-parameters-set">
+            		<div class="set-line">
+                    	<div class="set-btn"></div>
+                    </div>
+                    <div class="values">
+                    <span>0</span> S
+                    </div>
+            	</div>
+    </div>  
+	<div class="edit_text_nav">
+    	<div>字号</div>
+        <div>颜色</div>
+        <div class="act">背景</div>
+        <span></span>
+    </div>
+</div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<link href="style/reset.css" rel="stylesheet" type="text/css">
+<link href="style/css.css" rel="stylesheet" type="text/css">
+<title>涂抹设置</title>
+<script>
+(function (doc, win) {
+  var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+    };
+ 
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+</head>
+
+<body>
+<header>
+<div class="header">
+<a href="javascript:;" class="a-back"><span></span><b>返回</b></a>
+<h2>涂抹设置</h2>
+<a href="javascript:;" class="a-r"><span>完成</span></a>
+</div>
+
+</header>
+<section class="bg_f6f6f5">
+<div class="daub">
+	<div>
+    	<div class="daub-title">覆盖特效</div>
+        <div class="daub-r">
+        	<div class="daub-name">细沙</div>
+            <div class="daub-img">
+            	<img src="images/img05.jpg">
+            </div>
+        </div>
+        <div class="daub-img-list">
+        	<ul>
+            	<li>
+                	<img src="images/img05.jpg">
+                    <span>模糊</span>
+                </li>
+                <li>
+                	<img src="images/img05.jpg">
+                    <span>模糊</span>
+                </li>
+                <li>
+                	<img src="images/img05.jpg">
+                    <span>模糊</span>
+                </li>
+                <li>
+                	<img src="images/img05.jpg">
+                    <span>模糊</span>
+                </li>
+                <li>
+                	<img src="images/img05.jpg">
+                    <span>模糊</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
+    	<div class="daub-title">涂抹比例</div>
+        <div class="daub-r">
+        	<span>15%</span>
+            <span>30%</span>
+            <span>60%</span>
+        </div>
+    </div>
+    <div>
+    	<div class="daub-title">提示文字</div>
+        <div class="daub-r">
+        	<input type="text" placeholder="" class="daub-text">
+        </div>
+    </div>
+</div>
+
+</section>
+
+</body>
+</html>
