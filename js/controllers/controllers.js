@@ -2,7 +2,7 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:56:57
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-19 12:01:44
+* @Last Modified time: 2015-05-19 13:11:11
 */
 
 'use strict';
@@ -15,7 +15,8 @@
         controller('makeController',['$scope','$routeParams','magaProvider','$rootScope',makeController]).
         controller('musicController',['$scope','$routeParams','magaProvider','$window','$rootScope',musicController]).
         controller('textController',['$scope','$routeParams','magaProvider','$window','$rootScope',textController]).
-        controller('lotteryController',['$scope','$routeParams','magaProvider','$window','$rootScope',lotteryController]);
+        controller('lotteryController',['$scope','$routeParams','magaProvider','$window','$rootScope',lotteryController]).
+        controller('hyperLinkController',['$scope','$routeParams','magaProvider','$window','$rootScope',hyperLinkController]);
 
     function selectController($scope,$routeParams,magaProvider,$rootScope){
         $rootScope.root.bk_color_swift=false;
@@ -195,7 +196,19 @@
             $window.history.back();
         };
         $scope.yes=function(){
-            $scope.back();
+            // $scope.back();
+        };
+    }
+
+    function hyperLinkController($scope,$routeParams,magaProvider,$window,$rootScope){
+        // $rootScope.root.bk_color_swift=true;
+        $scope.buttonLeft="返回";
+        $scope.buttonRight="完成";
+        $scope.back=function(){
+            $window.history.back();
+        };
+        $scope.yes=function(){
+            // $scope.back();
         };
     }
 }));
