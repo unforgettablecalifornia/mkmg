@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
  
-html { font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;/*禁止文字缩放*/ font-size: 62.5%; }
-body { margin: 0;font-size:100%; line-height: 1.5; color: #333333; background-color: white; height: 100%; overflow-x: hidden; -webkit-overflow-scrolling: touch;  -webkit-touch-callout: none;}
+html { font-family: "Helvetica Neue", Helvetica, STHeiTi, Arial, sans-serif; -ms-text-size-adjust: 100%; -webkit-text-size-adjust: 100%;/*禁止文字缩放*/ font-size: 62.5%; height: 100%;  }
+body { margin: 0;font-size:100%; line-height: 1.5; color: #333333; background-color: white; height: 100%; overflow-x: hidden;  -webkit-touch-callout: none;}
 
 /*默认标签为内联，设置为块级元素*/
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary { display: block; }
