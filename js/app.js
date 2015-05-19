@@ -2,14 +2,15 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:49:10
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-18 17:21:42
+* @Last Modified time: 2015-05-19 10:22:47
 */
 
 'use strict';
 ;(function(root,factory){
+    var angular=window.angular;
     factory.call(root,angular);
 }(this,function(angular){
-    angular.module('app',['ngRoute','appControllers','appServices']).
+    angular.module('app',['ngRoute','appControllers','appServices','appDirectives']).
         config(['$routeProvider','$provide','$locationProvider',config]).
         run(['$templateCache',templateCache]);
 
