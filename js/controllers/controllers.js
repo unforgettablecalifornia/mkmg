@@ -2,26 +2,26 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:56:57
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-19 13:11:11
+* @Last Modified time: 2015-05-19 14:56:16
 */
 
 'use strict';
 ;(function(root,factory){
-    factory.call(root,angular);
+    var _=window._;
+    var $=window.$;
+    factory.call(root,angular,_,$);
 }(this,function(angular){
     var appControllers=angular.module('appControllers',[]);
     appControllers.
-        controller('selectController',['$scope','$routeParams','magaProvider','$rootScope',selectController]).
-        controller('makeController',['$scope','$routeParams','magaProvider','$rootScope',makeController]).
-        controller('musicController',['$scope','$routeParams','magaProvider','$window','$rootScope',musicController]).
-        controller('textController',['$scope','$routeParams','magaProvider','$window','$rootScope',textController]).
-        controller('lotteryController',['$scope','$routeParams','magaProvider','$window','$rootScope',lotteryController]).
-        controller('hyperLinkController',['$scope','$routeParams','magaProvider','$window','$rootScope',hyperLinkController]);
+        controller('selectController',['$scope','$routeParams','magaProvider','$rootScope','magasProvider',selectController]).
+        controller('makeController',['$scope','$routeParams','magaProvider','$rootScope','magasProvider',makeController]).
+        controller('musicController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',musicController]).
+        controller('textController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',textController]).
+        controller('lotteryController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',lotteryController]).
+        controller('hyperLinkController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',hyperLinkController]);
 
-    function selectController($scope,$routeParams,magaProvider,$rootScope){
+    function selectController($scope,$routeParams,magaProvider,$rootScope,magasProvider){
         $rootScope.root.bk_color_swift=false;
-        $scope.title='选择素材';
-        $scope.button='返回';
         $scope.elements=[
                 {
                     src:'img/img-default.jpg',
@@ -64,24 +64,23 @@
                     id:8
                 }
             ];
-        $scope.id=null;
+        $scope.modelId=null;
         $scope.show=function(id,name){
             $('.inputName').removeClass('hide');
-            $scope.id=id;
-            $scope.name=name;
+            $scope.modelId=id;
+            $scope.modelName=name;
         };
-        $scope.make=function(id,name,magazineName){
-            magaProvider.id=id;
-            magaProvider.name=name;
+        $scope.make=function(modelId,modelName,magazineName){
+            magaProvider.modelId=modelId;
+            magaProvider.modleName=modelName;
             magaProvider.magazineName=magazineName;
+            magasProvider.add();
         };
     }
     function makeController($scope,$routeParams,magaProvider,$rootScope){
         $rootScope.root.bk_color_swift=true;
-        $scope.buttonLeft="返回";
-        $scope.buttonRight="预览";
-        $scope.name=magaProvider.name;
-        $scope.id=magaProvider.id;
+        $scope.modelName=magaProvider.modelName;
+        $scope.modelId=magaProvider.modelId;
         $scope.imgs=[
                 {
                     src:'img/img03.jpg'

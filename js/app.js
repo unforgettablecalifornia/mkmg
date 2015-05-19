@@ -2,7 +2,7 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:49:10
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-19 10:22:47
+* @Last Modified time: 2015-05-19 15:34:27
 */
 
 'use strict';
@@ -27,23 +27,23 @@
                 templateUrl:'partials/select.html',
                 controller:'selectController'
             }).
-            when('/make/:id',{
+            when('/make/:modelId',{
                 templateUrl:'partials/make.html',
                 controller:'makeController'
             }).
-            when('/make/:id/music',{
+            when('/music',{
                 templateUrl:'partials/music.html',
                 controller:'musicController'
             }).
-            when('/make/:id/text',{
+            when('/text',{
                 templateUrl:'partials/text.html',
                 controller:'textController'
             }).
-            when('/make/:id/lottery',{
+            when('/lottery',{
                 templateUrl:'partials/lottery.html',
                 controller:'lotteryController'
             }).
-            when('/make/:id/hyperLink',{
+            when('/hyperLink',{
                 templateUrl:'partials/hyperLink.html',
                 controller:'hyperLinkController'
             });

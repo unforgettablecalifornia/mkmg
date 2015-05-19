@@ -1,8 +1,8 @@
 <header>
     <div class="header">
-        <a href="#/" class="a-back"><span></span><b>{{buttonLeft}}</b></a>
-        <h2>{{name}}</h2>
-        <a href="javascript:;" class="a-r"><span>{{buttonRight}}</span></a>
+        <a href="#/" class="a-back"><span></span><b>返回</b></a>
+        <h2>选择素材</h2>
+        <a href="javascript:;" class="a-r"><span>预览</span></a>
     </div>
 </header>
 <section>
@@ -46,7 +46,7 @@
         <div ng-class="{'s-c-b-list':true,hide:swift}" drag-directive>
             <div class="s-edit-btn">
                 <div>
-                    <a ng-href="#/make/{{id}}/text">
+                    <a ng-href="#/text">
                         <span>
                             <em class="text"></em>
                             文本
@@ -66,7 +66,7 @@
                     </span>
                 </div>
                 <div>
-                    <a ng-href="#/make/{{id}}/lottery">
+                    <a ng-href="#/lottery">
                         <span>
                             <em class="draw"></em>
                             涂抹
@@ -80,7 +80,7 @@
                     </span>
                 </div>
                 <div>
-                    <a ng-href="#/make/{{id}}/music">
+                    <a ng-href="#/music">
                         <span>
                         <em class="music"></em>
                         音乐
@@ -88,7 +88,7 @@
                     </a>
                 </div>
                 <div>
-                    <a ng-href="#/make/{{id}}/hyperLink">
+                    <a ng-href="#/hyperLink">
                         <span>
                             <em class="copy"></em>
                             按钮
@@ -97,5 +97,65 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="animation-operate" ng-class="{hide:true}">
+        <div class="animation-parameters">
+            <div class="item">
+                <div class="title">
+                动画时间
+            </div>
+                <div class="animation-parameters-set">
+                    <div class="set-line">
+                        <div class="set-btn"></div>
+                    </div>
+                    <div class="values">
+                    <span>0</span> S
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="title">
+                延时时间
+                </div>
+                <div class="animation-parameters-set">
+                    <div class="set-line">
+                        <div class="set-btn"></div>
+                    </div>
+                    <div class="values">
+                    <span>0</span> S
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="animation-nav-btn">
+        <div class="clear-animation">
+            <span></span>
+            <em>清除动画</em>
+        </div>
+        <div class="animation-btn-list">
+            <div class="ani-btn">
+                <div>
+                    <span class="fadeIn"></span>
+                    <em>淡入</em>
+                </div>
+                <div>
+                    <span class="fadeOut"></span>
+                    <em>淡出</em>
+                </div>
+                <div>
+                    <span class="amplify"></span>
+                    <em>放大</em>
+                </div>
+                <div>
+                    <span class="rotation"></span>
+                    <em>旋转</em>
+                </div>
+                <div>
+                    <span class="Shake"></span>
+                    <em>抖动</em>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
 </footer>

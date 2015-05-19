@@ -5,7 +5,8 @@
     factory.call(root,angular,Math);
 }(this,function(angular){
     angular.module('appDirectives',[]).
-        directive('dragDirective',dragDirective);
+        directive('dragDirective',dragDirective).
+        directive('cropperDirective',cropperDirective);
 
     function dragDirective(){
         return {
@@ -53,4 +54,13 @@
             }
         }
     };
+    function cropperDirective(){
+        return {
+            scope:{},
+            restrict:'A',
+            link:function(scope,ele,attrs){
+                // ele[]
+            }
+        }
+    }
 }));
