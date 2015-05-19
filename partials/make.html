@@ -7,7 +7,7 @@
 </header>
 <section class="stage_bj">
     <div class="stage">
-        <div class="s-img" ng-repeat="img in imgs">
+        <div class="s-img" ng-repeat="img in imgs" cropper-directive>
             <img ng-src="{{img.src}}">
             <div ng-class="{hide:true}" class="Line_frame">
                 <span class="left_t"></span>

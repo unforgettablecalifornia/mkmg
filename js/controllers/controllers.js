@@ -1,16 +1,13 @@
-/* 
-* @Author: wanghongxin
-* @Date:   2015-05-05 17:56:57
-* @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-19 16:46:33
-*/
-
 'use strict';
 ;(function(root,factory){
+    //显性的指明依赖
     var _=window._;
     var $=window.$;
+    var angular=window.angular;
+    //运行工厂且传入依赖
     factory.call(root,angular,_,$);
-}(this,function(angular){
+}(this,function(angular){//工厂的定义
+    //定义一个angular模块，专门存放控制器
     var appControllers=angular.module('appControllers',[]);
     appControllers.
         controller('selectController',['$scope','$routeParams','magaProvider','$rootScope','magasProvider','$http',selectController]).
@@ -19,31 +16,33 @@
         controller('textController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',textController]).
         controller('lotteryController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',lotteryController]).
         controller('hyperLinkController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',hyperLinkController]);
-
+    //控制器的统一定义
+    //选择模板页面控制器    
     function selectController($scope,$routeParams,magaProvider,$rootScope,magasProvider,$http){
-        $rootScope.root.bk_color_swift=false;
         $http({
                 method:'GET',
                 url:'/model/model.json'
             }).
             success(function(data){
-                $scope.elements=data;
+                $scope.elements=data;//远程读取页面数据
             });
-        $scope.modelId=null;
-        $scope.show=function(id,name){
+        $scope.modelId=null;//用户选择的模板编号
+        $scope.show=function(id,name){//弹出对话框
             $('.inputName').removeClass('hide');
             $scope.modelId=id;
             $scope.modelName=name;
         };
         $scope.make=function(modelId,modelName,magazineName){
-            magaProvider.modelId=modelId;
+            //用户从对话框进入下个页面
+            magaProvider.modelId=modelId;//模板编号放入当前杂志服务
             magaProvider.modleName=modelName;
             magaProvider.magazineName=magazineName;
-            magasProvider.add();
+            magasProvider.add();//增加一个杂志
         };
     }
+
+    //制作页面控制器
     function makeController($scope,$routeParams,magaProvider,$rootScope,magasProvider,$http){
-        $rootScope.root.bk_color_swift=true;
         $scope.modelName=magaProvider.modelName;
         $scope.modelId=magaProvider.modelId;
         $http({
@@ -51,17 +50,17 @@
                 url:'/model/page/page.json'
             }).
             success(function(data){
-                        $scope.imgs=data;
+                        $scope.imgs=data;//制作页面读取远程数据
                 });
-        $scope.swift=magaProvider.swift;
+        $scope.swift=magaProvider.swift;//功能菜单的切换
         $scope.control=function(){
             magaProvider.swift=!magaProvider.swift;
             $scope.swift=magaProvider.swift;
         };
     }
 
+    //音乐页面控制器
     function musicController($scope,$routeParams,magaProvider,$window,$rootScope,magasProvider,$http){
-        $rootScope.root.bk_color_swift=true;
         $scope.tempMusic=null;
         $http({
                 method:'GET',
@@ -70,26 +69,27 @@
             success(function(data){
                 $scope.musics=data;
             });
+        //点击返回
         $scope.back=function(){
             $window.history.back();
         };
+        //选取音乐
         $scope.setMusic=function(id){
             $scope.tempMusic=id;
         };
+        //点击完成
         $scope.yes=function(){
             magaProvider.musicName=$scope.tempMusic;
         };
     }
 
+    //编辑文本页面控制器
     function textController($scope,$routeParams,magaProvider,$window,$rootScope){
-        $rootScope.root.bk_color_swift=true;
-        $scope.fn1='字号';
-        $scope.fn2='颜色';
-        $scope.fn3='背景';
-        $scope.placeholder='请输入您要编辑的内容';
+        //点击返回
         $scope.back=function(){
             $window.history.back();
         };
+        //点击完成
         $scope.yes=function(){
             if($scope.text){
                 magaProvider.texts.push($scope.text);
@@ -97,21 +97,25 @@
         };
     }
 
+    //涂抹页面控制器
     function lotteryController($scope,$routeParams,magaProvider,$window,$rootScope){
-        $rootScope.root.bk_color_swift=true;
+        //点击返回
         $scope.back=function(){
             $window.history.back();
         };
+        //点击完成
         $scope.yes=function(){
             // $scope.back();
         };
     }
 
+    //超链接页面控制器
     function hyperLinkController($scope,$routeParams,magaProvider,$window,$rootScope){
-        // $rootScope.root.bk_color_swift=true;
+        //点击返回
         $scope.back=function(){
             $window.history.back();
         };
+        //点击完成
         $scope.yes=function(){
             // $scope.back();
         };

@@ -7,19 +7,7 @@
     <link href="css/reset.css" rel="stylesheet" type="text/css">
     <link href="css/css.css" rel="stylesheet" type="text/css">
     <script>
-    (function (doc, win) {
-      var docEl = doc.documentElement,
-        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-        recalc = function () {
-          var clientWidth = docEl.clientWidth;
-          if (!clientWidth) return;
-          docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
-        };
-     
-      if (!doc.addEventListener) return;
-      win.addEventListener(resizeEvt, recalc, false);
-      doc.addEventListener('DOMContentLoaded', recalc, false);
-    })(document, window);
+    (function(e,n){var t=e.documentElement,i="orientationchange"in window?"orientationchange":"resize",d=function(){var e=t.clientWidth;if(!e)return;t.style.fontSize=20*(e/320)+"px"};if(!e.addEventListener)return;n.addEventListener(i,d,false);e.addEventListener("DOMContentLoaded",d,false)})(document,window);
     </script>
 </head>
 <body>
@@ -30,11 +18,12 @@
     <script src="js/vender/angular-resource.js"></script>
     <script src="js/vender/angular-route.js"></script>
     <script src="js/vender/zepto.js"></script>
+    <script src="js/vender/touch.js"></script>
     <script src="js/vender/underscore.js"></script>
-    <script type="text/javascript" src="js/controllers/controllers.js"></script>
-    <script type="text/javascript" src="js/services/services.js"></script>
-    <script type="text/javascript" src="js/filters/filters.js"></script>
-    <script type="text/javascript" src="js/directives/directives.js"></script>
-    <script type="text/javascript" src="js/app.js"></script>
+    <script src="js/controllers/controllers.js"></script>
+    <script src="js/services/services.js"></script>
+    <script src="js/filters/filters.js"></script>
+    <script src="js/directives/directives.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

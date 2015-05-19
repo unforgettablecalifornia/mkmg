@@ -1,13 +1,17 @@
 'use strict';
 ;(function(root,factory){
+    //显性的指明依赖
     var angular=window.angular;
     var Math=window.Math;
+    //运行工厂且传入依赖
     factory.call(root,angular,Math);
-}(this,function(angular){
+}(this,function(angular){//工厂的定义
+    //定义一个angular模块，存放应用的指令
     angular.module('appDirectives',[]).
         directive('dragDirective',dragDirective).
         directive('cropperDirective',cropperDirective);
-
+    //指令的统一定义
+    //拖拽指令
     function dragDirective(){
         return {
             scope:{},
@@ -54,12 +58,16 @@
             }
         }
     };
+    //图片截取指令
     function cropperDirective(){
         return {
             scope:{},
             restrict:'A',
             link:function(scope,ele,attrs){
-                // ele[]
+                var ele=$(ele[0]);
+                ele.on('tap',function(){
+                    alert(33);
+                });
             }
         }
     }
