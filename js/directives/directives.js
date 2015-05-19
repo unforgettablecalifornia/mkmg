@@ -1,9 +1,3 @@
-/* 
-* @Author: wanghongxin
-* @Date:   2015-05-05 17:56:42
-* @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-19 11:34:23
-*/
 'use strict';
 ;(function(root,factory){
     var angular=window.angular;
@@ -37,10 +31,6 @@
                 ele.on('touchmove',function(e){
                     touchPos.x=e.touches[0].pageX;
                     touchPos.deltaX=touchPos.x-touchPos.startX;
-                });
-                ele.on('touchend',function(e){
-                    touchPos.endX=touchPos.x;
-                    console.log(touchPos.deltaX)
                     if(Math.abs(touchPos.deltaX)>100){
                         if(touchPos.deltaX>0){
                             ele.css({
@@ -56,7 +46,10 @@
                                 });
                         }
                     }
-                })
+                });
+                ele.on('touchend',function(e){
+                    
+                });
             }
         }
     };
