@@ -2,12 +2,13 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:56:42
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-19 10:52:34
+* @Last Modified time: 2015-05-19 11:34:23
 */
 'use strict';
 ;(function(root,factory){
     var angular=window.angular;
-    factory.call(root,angular);
+    var Math=window.Math;
+    factory.call(root,angular,Math);
 }(this,function(angular){
     angular.module('appDirectives',[]).
         directive('dragDirective',dragDirective);
@@ -17,23 +18,45 @@
             scope:{},
             restrict:'A',
             link:function(scope,ele,attrs){
-                ele=$(ele[0]);
-                var width=ele.children().children().width()*7;
+                ele=$(ele[0]).find('.s-edit-btn');
+                var width=ele.children().children().width();
+                var wrapperWidth=width*7;
                 var touchPos={
                     startX:0,
                     x:0,
-                    endX:0
+                    deltaX:0
                 };
-                var wrapperPos={
-                    x:0
-                }
+                ele.css({
+                    'webkitTransition':'all ease 0.5s',
+                    'transition':'all ease 0.5s',
+                    '-webkit-transition':'all ease 0.5s'
+                });
                 ele.on('touchstart',function(e){
                     touchPos.startX=e.touches[0].pageX;
-                    console.log(touchPos.startX)
                 });
                 ele.on('touchmove',function(e){
-                    console.log('a')
+                    touchPos.x=e.touches[0].pageX;
+                    touchPos.deltaX=touchPos.x-touchPos.startX;
                 });
+                ele.on('touchend',function(e){
+                    touchPos.endX=touchPos.x;
+                    console.log(touchPos.deltaX)
+                    if(Math.abs(touchPos.deltaX)>100){
+                        if(touchPos.deltaX>0){
+                            ele.css({
+                                    'webkitTransform':'translate(0,0)',
+                                    'transform':'translate(0,0)',
+                                    '-webkit-transform':'translate(0,0)'
+                                });
+                        }else{
+                            ele.css({
+                                    'webkitTransform':'translate(-'+width+'px,0)',
+                                    'transform':'translate(-'+width+'px,0)',
+                                    '-webkit-transform':'translate(-'+width+'px,0)'
+                                });
+                        }
+                    }
+                })
             }
         }
     };
