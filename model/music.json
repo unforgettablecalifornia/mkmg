@@ -1,0 +1,39 @@
+[{
+        "type": "无音乐",
+        "list": [{
+            "musicId": 1,
+            "musicName": "飞"
+        }, {
+            "musicId": 2,
+            "musicName": "飞飞"
+        }, {
+            "musicId": 3,
+            "musicName": "飞飞飞"
+        }]
+    }, {
+        "type": "动感",
+        "list": [{
+            "musicId": 1,
+            "musicName": "飞"
+        }, {
+            "musicId": 2,
+            "musicName": "飞飞"
+        }, {
+            "musicId": 3,
+            "musicName": "飞飞飞"
+        }]
+    }, {
+        "type": "动感",
+        "list": [{
+            "musicId": 1,
+            "musicName": "飞"
+        }, {
+            "musicId": 2,
+            "musicName": "飞飞"
+        }, {
+            "musicId": 3,
+            "musicName": "飞飞飞"
+        }]
+    }
+
+]

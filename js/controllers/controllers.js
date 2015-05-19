@@ -2,7 +2,7 @@
 * @Author: wanghongxin
 * @Date:   2015-05-05 17:56:57
 * @Last Modified by:   wanghongxin
-* @Last Modified time: 2015-05-19 14:56:16
+* @Last Modified time: 2015-05-19 16:46:33
 */
 
 'use strict';
@@ -13,57 +13,22 @@
 }(this,function(angular){
     var appControllers=angular.module('appControllers',[]);
     appControllers.
-        controller('selectController',['$scope','$routeParams','magaProvider','$rootScope','magasProvider',selectController]).
-        controller('makeController',['$scope','$routeParams','magaProvider','$rootScope','magasProvider',makeController]).
-        controller('musicController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',musicController]).
+        controller('selectController',['$scope','$routeParams','magaProvider','$rootScope','magasProvider','$http',selectController]).
+        controller('makeController',['$scope','$routeParams','magaProvider','$rootScope','magasProvider','$http',makeController]).
+        controller('musicController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider','$http',musicController]).
         controller('textController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',textController]).
         controller('lotteryController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',lotteryController]).
         controller('hyperLinkController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',hyperLinkController]);
 
-    function selectController($scope,$routeParams,magaProvider,$rootScope,magasProvider){
+    function selectController($scope,$routeParams,magaProvider,$rootScope,magasProvider,$http){
         $rootScope.root.bk_color_swift=false;
-        $scope.elements=[
-                {
-                    src:'img/img-default.jpg',
-                    name:'自定义',
-                    id:1
-                },
-                {
-                    src:'img/img01.jpg',
-                    name:'莫负时光',
-                    id:2
-                },
-                {
-                    src:'img/img01.jpg',
-                    name:'莫负时光',
-                    id:3
-                },
-                {
-                    src:'img/img01.jpg',
-                    name:'莫负时光',
-                    id:4
-                },
-                {
-                    src:'img/img01.jpg',
-                    name:'莫负时光',
-                    id:5
-                },
-                {
-                    src:'img/img01.jpg',
-                    name:'莫负时光',
-                    id:6
-                },
-                {
-                    src:'img/img01.jpg',
-                    name:'莫负时光',
-                    id:7
-                },
-                {
-                    src:'img/img01.jpg',
-                    name:'莫负时光',
-                    id:8
-                }
-            ];
+        $http({
+                method:'GET',
+                url:'/model/model.json'
+            }).
+            success(function(data){
+                $scope.elements=data;
+            });
         $scope.modelId=null;
         $scope.show=function(id,name){
             $('.inputName').removeClass('hide');
@@ -77,21 +42,17 @@
             magasProvider.add();
         };
     }
-    function makeController($scope,$routeParams,magaProvider,$rootScope){
+    function makeController($scope,$routeParams,magaProvider,$rootScope,magasProvider,$http){
         $rootScope.root.bk_color_swift=true;
         $scope.modelName=magaProvider.modelName;
         $scope.modelId=magaProvider.modelId;
-        $scope.imgs=[
-                {
-                    src:'img/img03.jpg'
-                },
-                {
-                    src:'img/img02.jpg'
-                },
-                {
-                    src:'img/img02.jpg'
-                }
-            ];
+        $http({
+                method:'GET',
+                url:'/model/page/page.json'
+            }).
+            success(function(data){
+                        $scope.imgs=data;
+                });
         $scope.swift=magaProvider.swift;
         $scope.control=function(){
             magaProvider.swift=!magaProvider.swift;
@@ -99,65 +60,16 @@
         };
     }
 
-    function musicController($scope,$routeParams,magaProvider,$window,$rootScope){
+    function musicController($scope,$routeParams,magaProvider,$window,$rootScope,magasProvider,$http){
         $rootScope.root.bk_color_swift=true;
-        $scope.buttonLeft="返回";
-        $scope.buttonRight="完成";
         $scope.tempMusic=null;
-        $scope.musics=[
-            {
-                type:'无音乐',
-                list:[
-                    {
-                        musicId:1,
-                        musicName:'飞'
-                    },
-                    {
-                        musicId:2,
-                        musicName:'飞飞'
-                    },
-                    {
-                        musicId:3,
-                        musicName:'飞飞飞'
-                    }
-                ]
-            },
-            {
-                type:'动感',
-                list:[
-                    {
-                        musicId:1,
-                        musicName:'飞'
-                    },
-                    {
-                        musicId:2,
-                        musicName:'飞飞'
-                    },
-                    {
-                        musicId:3,
-                        musicName:'飞飞飞'
-                    }
-                ]
-            },
-            {
-                type:'动感',
-                list:[
-                    {
-                        musicId:1,
-                        musicName:'飞'
-                    },
-                    {
-                        musicId:2,
-                        musicName:'飞飞'
-                    },
-                    {
-                        musicId:3,
-                        musicName:'飞飞飞'
-                    }
-                ]
-            },
-
-        ];
+        $http({
+                method:'GET',
+                url:'/model/music.json'
+            }).
+            success(function(data){
+                $scope.musics=data;
+            });
         $scope.back=function(){
             $window.history.back();
         };
@@ -171,8 +83,6 @@
 
     function textController($scope,$routeParams,magaProvider,$window,$rootScope){
         $rootScope.root.bk_color_swift=true;
-        $scope.buttonLeft="返回";
-        $scope.buttonRight="完成";
         $scope.fn1='字号';
         $scope.fn2='颜色';
         $scope.fn3='背景';
@@ -189,8 +99,6 @@
 
     function lotteryController($scope,$routeParams,magaProvider,$window,$rootScope){
         $rootScope.root.bk_color_swift=true;
-        $scope.buttonLeft="返回";
-        $scope.buttonRight="完成";
         $scope.back=function(){
             $window.history.back();
         };
@@ -201,8 +109,6 @@
 
     function hyperLinkController($scope,$routeParams,magaProvider,$window,$rootScope){
         // $rootScope.root.bk_color_swift=true;
-        $scope.buttonLeft="返回";
-        $scope.buttonRight="完成";
         $scope.back=function(){
             $window.history.back();
         };
