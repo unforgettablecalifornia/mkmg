@@ -61,14 +61,21 @@
     //图片截取指令
     function cropperDirective(){
         return {
-            scope:{},
+            scope:{
+                switch:'@'
+            },
             restrict:'A',
+            templateUrl:'/partials/cropper.html',
+            transclude:true,
             link:function(scope,ele,attrs){
-                var ele=$(ele[0]);
-                ele.on('tap',function(){
-                    alert(33);
-                });
-            }
+                    // scope.switch=true;
+                    var ele=$(ele[0]);
+                    ele.on('longTap',function(){
+                        scope.$apply(function(){
+                            scope.switch=false;
+                        });
+                    });
+                }
         }
     }
 }));

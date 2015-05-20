@@ -7,20 +7,8 @@
 </header>
 <section class="stage_bj">
     <div class="stage">
-        <div class="s-img" ng-repeat="img in imgs" cropper-directive>
+        <div class="s-img" ng-init="cropper_switch=true" ng-repeat="img in imgs"  x-cropper-directive x-switch="{{cropper_switch}}">
             <img ng-src="{{img.src}}">
-            <div ng-class="{hide:true}" class="Line_frame">
-                <span class="left_t"></span>
-                <span class="left_b"></span>
-                <span class="right_t"></span>
-                <span class="right_b"></span>
-                <span class="center_t"></span>
-                <span class="center_b"></span>
-            </div>
-            <div ng-class="{hide:true}" class="s-img-layer">
-                <div>动画</div>
-                <div>删除</div>
-            </div>
         </div>
     </div>
 </section>
@@ -43,7 +31,7 @@
                 </div>
             </div>
         </div>
-        <div ng-class="{'s-c-b-list':true,hide:swift}" drag-directive>
+        <div ng-class="{'s-c-b-list':true,hide:swift}" x-drag-directive>
             <div class="s-edit-btn">
                 <div>
                     <a ng-href="#/text">
