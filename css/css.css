@@ -184,3 +184,10 @@ left:calc(50% - 6rem); top:calc(50% - 2.5rem); z-index:9999999999;}
     top: 300px;
     font-color:red;
 }
+/*裁剪*/
+.cropper{
+    display: none;
+}
+.active .cropper{
+    display: -webkit-box;
+}
