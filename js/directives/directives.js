@@ -63,7 +63,7 @@
                 pos:'@'
             },
             restrict:'A',
-            templateUrl:'/partials/cropper.html',
+            templateUrl:'partials/cropper.html',
             transclude:true,
             link:function(scope,ele,attrs){
                     var ele=$(ele[0]),
@@ -113,7 +113,10 @@
                             fadeOutBtn.on('tap',addAnimation.bind(ele,'at-fadeOut'));
                             amplifyBtn.on('tap',addAnimation.bind(ele,'at-amplify'));
                             rotationBtn.on('tap',addAnimation.bind(ele,'at-rotation'));
-                            shakeBtn.on('tap',addAnimation.bind(ele,'at-shake'));  
+                            shakeBtn.on('tap',addAnimation.bind(ele,'at-shake'));
+                            // $(document).on('contextmenu',controll);
+                            $(window).on('touchmove.scroll',controll);
+                            $(window).on('scroll.scroll',controll);
                         }
                         ele.on('longTap',showCropperLayer);
                         ele.find('.anim').on('tap',showAnimationLayer);
@@ -125,7 +128,16 @@
                         cropper000010();
                         cropper000001();
                     }
-
+                    function cancell(){
+                        var imgs=ele.find('img');
+                        imgs.on('touchstart',controll);
+                        imgs.on('touchmove',controll);
+                        imgs.on('touchend',controll);
+                        imgs.on('contextmenu',controll);
+                    }
+                    function controll(){
+                        return false;
+                    }
                     function cropper100000(){
                         var flip=new Flip();
                         flip.init({
@@ -265,7 +277,7 @@
                         
                     }
                     function cropper000010(){
-                         var flip=new Flip();
+                        var flip=new Flip();
                         flip.init({
                                 target:span000010[0],
                                 start:start,
@@ -297,7 +309,7 @@
                         
                     }
                     function cropper000001(){
-                         var flip=new Flip();
+                        var flip=new Flip();
                         flip.init({
                                 target:span000001[0],
                                 start:start,
@@ -346,6 +358,10 @@
                     function showAnimationLayer(){
                         animationOperate.removeClass('hide');
                         stageNav.addClass('hide');
+
+                        ele.find('img').off('contextmenu',controll);
+                        ele.find('img').on('contextmenu',controll);
+
                     }
                     function closeAnimationLayer(){
                         animationOperate.addClass('hide');
@@ -371,8 +387,6 @@
                         updateMovePos(e);
                         updateDelta();
                         setPos();
-
-
                     }
                     function drop(){
                         ele.off('touchmove',drag);

@@ -21,7 +21,7 @@
     function selectController($scope,$routeParams,magaProvider,$rootScope,magasProvider,$http){
         $http({
                 method:'GET',
-                url:'/model/model.json'
+                url:'model/model.json'
             }).
             success(function(data){
                 $scope.elements=data;//远程读取页面数据
@@ -47,7 +47,7 @@
         $scope.modelId=magaProvider.modelId;
         $http({
                 method:'GET',
-                url:'/model/page/page.json'
+                url:'model/page/page.json'
             }).
             success(function(data){
                         $scope.imgs=data;//制作页面读取远程数据
@@ -64,7 +64,7 @@
         $scope.tempMusic=null;
         $http({
                 method:'GET',
-                url:'/model/music.json'
+                url:'model/music.json'
             }).
             success(function(data){
                 $scope.musics=data;
