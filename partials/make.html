@@ -6,8 +6,10 @@
     </div>
 </header>
 <section class="stage_bj">
-    <div class="stage">
-        <div class="s-img" ng-init="cropper_switch=true" ng-repeat="img in imgs"  x-cropper-directive x-switch="{{cropper_switch}}">
+	<div class="stage-box">
+    	<div class="stage">
+        <div class="page">
+        	<div class="s-img" ng-repeat="img in imgs" x-cropper-directive style="left:{{img.style.left}}px; top:{{img.style.top}}px;">
             <img ng-src="{{img.src}}">
         </div>
     </div>

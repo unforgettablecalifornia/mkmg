@@ -7,7 +7,9 @@
     angular.module('appDirectives',[]).
         directive('dragDirective',dragDirective).
         directive('cropperDirective',cropperDirective).
-        directive('dragSetDirective',dragSetDirective);
+        directive('dragSetDirective',dragSetDirective).
+		directive('btn',btn).
+		directive('myScroll',myScroll);
     //拖拽指令
     function dragDirective(){
         return {
@@ -168,5 +170,71 @@
                 }
             }
         };
+    }
+
+    //超链接底部导航
+    function btn(){
+        return {
+            scope:{},
+            restrict:'A',
+            link:function(scope,element,attrs){
+                var obj = $(element[0]);
+                var btn_list = obj.find(".edit_text_nav").find("div");
+                var area = obj.find(".edit_box").find(".display_area");
+                btn_list.each(function(i){
+                    $(this).on("tap",function(){ 
+                    $(this).addClass("act").siblings().removeClass("act");
+                    area.eq(i).show().siblings().hide()
+                  })
+                })
+            }   
+        }
+    }
+
+    //拖拽设置
+    function myScroll(){
+        return {
+            restrict: 'E',
+            replace: true,
+            scope: {
+                myId:"@",
+                info:"=",
+            },
+            template: '<div id="{{myId}}"><div class="set-line"><div class="set-btn"></div></div><div class="values"></div></div>',
+            link : function(scope,element,attr){
+                var element=$(element[0]);
+                var obj1 = element.find(".set-btn");
+                var obj2 = element.find(".set-line");
+                var obj3 = element.find(".values");
+                obj1.on("touchstart",function(ev){
+                    
+                    var disX=ev.targetTouches[0].pageX - obj1.position().left;
+                    var disY=ev.targetTouches[0].pageY - obj1.position().top;
+    
+                    $(document).on("touchmove",function(ev){    
+                        var l=ev.targetTouches[0].pageX-disX;   
+                        if(l<0)
+                        {
+                            l=0;
+                        }else if(l > obj2.width() - obj1.width())
+                        {
+                            l = obj2.width() - obj1.width()
+                        }
+                        obj1.css("left",l);
+                        
+                        var sacle=l/(obj2.width() - obj1.width());
+                        obj3.html(parseInt(sacle * scope.info));
+                        }
+                    );
+                    $(document).on("touchend",function(){
+                        obj1.off("touchstart");
+                        
+                    });
+                    ev.preventDefault();    
+                    
+                });
+                
+            },
+        }   
     }
 }));

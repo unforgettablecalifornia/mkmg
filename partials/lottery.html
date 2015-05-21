@@ -11,11 +11,11 @@
             <div class="daub-title">覆盖特效</div>
             <div class="daub-r">
                 <div class="daub-name">细沙</div>
-                <div class="daub-img">
+                <div class="daub-img"  ng-click="show=!show" ng-class="{fan: show}">
                     <img src="img/img05.jpg">
                 </div>
             </div>
-            <div class="daub-img-list">
+            <div class="daub-img-list" ng-show="show">
                 <ul>
                     <li>
                         <img src="img/img05.jpg">
@@ -43,9 +43,7 @@
         <div>
             <div class="daub-title">涂抹比例</div>
             <div class="daub-r">
-                <span>15%</span>
-                <span>30%</span>
-                <span>60%</span>
+                <span ng-repeat="i in column" ng-click="getthis($index)" ng-class="{active: act==$index}">{{i}}</span>
             </div>
         </div>
         <div>

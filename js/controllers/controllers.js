@@ -95,6 +95,10 @@
                 magaProvider.texts.push($scope.text);
             }
         };
+		
+		$scope.font = 60;
+		$scope.color = 30;
+		$scope.backgound = 20;
     }
 
     //涂抹页面控制器
@@ -107,6 +111,15 @@
         $scope.yes=function(){
             // $scope.back();
         };
+		
+		$scope.show = false;
+		$scope.column = ["15%","30%","60%"];
+		function getthis(n)
+		{
+			$scope.act=n;	
+		}
+		$scope.getthis=getthis;
+		
     }
 
     //超链接页面控制器
@@ -119,5 +132,9 @@
         $scope.yes=function(){
             // $scope.back();
         };
+		$scope.color = 30;
+		$scope.font_size = 60;
+		$scope.font_color = 60;
+		$scope.radius = 20;
     }
 }));

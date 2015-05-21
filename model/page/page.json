@@ -1,7 +1,25 @@
-[{
-    "src": "img/img03.jpg"
-}, {
-    "src": "img/img02.jpg"
-}, {
-    "src": "img/img02.jpg"
-}]
+[
+    {
+        "src": "img/img03.jpg",
+        "style": {
+            "left": "10",
+            "top": "20"
+        }
+    },
+    {
+        "src": "img/img02.jpg",
+        "style": {
+            "left": "10",
+            "top": "173"
+        }
+    },
+    {
+        "src": "img/img02.jpg",
+        "style": {
+            "left": "10",
+            "top": "335"
+        }
+    }
+]
+
+
