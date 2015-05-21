@@ -5,13 +5,13 @@
     factory.call(root,angular,Math);
 }(this,function(angular){
     angular.module('appDirectives',[]).
-        directive('dragDirective',dragDirective).
+        directive('dragXDirective',dragXDirective).
         directive('cropperDirective',cropperDirective).
         directive('dragSetDirective',dragSetDirective).
 		directive('btn',btn).
-		directive('myScroll',myScroll);
-    //拖拽指令
-    function dragDirective(){
+        directive('myScroll',myScroll);
+    //制作页面导航拖拽
+    function dragXDirective(){
         return {
             scope:{},
             restrict:'A',
@@ -74,9 +74,38 @@
                         fadeOutBtn=$('.fadeOutBtn'),//淡出按钮
                         amplifyBtn=$('.amplifyBtn'),//放大按钮
                         rotationBtn=$('.rotationBtn'),//旋转按钮
-                        shakeBtn=$('.shakeBtn');//抖动按钮
+                        shakeBtn=$('.shakeBtn'),//抖动按钮
+                        span100000=ele.find('.left_t'),
+                        span010000=ele.find('.center_t'),
+                        span001000=ele.find('.right_t'),
+                        span000100=ele.find('.left_b'),
+                        span000010=ele.find('.center_b'),
+                        span000001=ele.find('.right_b'),
+                        pos={
+                                start:{
+                                        x:null,
+                                        y:null
+                                    },
+                                move:{
+                                        x:null,
+                                        y:null
+                                    },
+                                end:{
+                                        x:null,
+                                        y:null
+                                    },
+                                now:{
+                                    left:null,
+                                    top:null
+                                },
+                                delta:{
+                                    x:null,
+                                    y:null
+                                }
+                            };
                     init();
                     function init(){
+                        ele.on('touchstart',sometime);
                         if(!closeAnimation.data('only')){
                             closeAnimation.data('only', true);
                             closeAnimation.on('tap',closeAnimationLayer);
@@ -89,9 +118,218 @@
                         ele.on('longTap',showCropperLayer);
                         ele.find('.anim').on('tap',showAnimationLayer);
                         ele.find('.del').on('tap',delActive);
+                        cropper100000();
+                        cropper010000();
+                        cropper001000();
+                        cropper000100();
+                        cropper000010();
+                        cropper000001();
                     }
 
-
+                    function cropper100000(){
+                        var flip=new Flip();
+                        flip.init({
+                                target:span100000[0],
+                                start:start,
+                                move:move
+                            });
+                        var dim={
+                            width:null,
+                            height:null
+                        };
+                        var pos={
+                            left:null,
+                            top:null
+                        };
+                        function start(e){
+                            dim.width=parseInt(ele.css('width'));
+                            dim.height=parseInt(ele.css('height'));
+                            pos.left=parseInt(ele.css('left'));
+                            pos.top=parseInt(ele.css('top'));
+                            prevent(e);
+                            stop(e);
+                        }
+                        function move(e){
+                            var width=dim.width-e._x,
+                                height=dim.height-e._y;
+                            var left=pos.left+e._x,
+                                top=pos.top+e._y;
+                            ele.css({
+                                width: width+'px',
+                                height: height+'px',
+                                left:left+'px',
+                                top:top+'px'
+                            });
+                        }
+                    }
+                    function cropper010000(){
+                        var flip=new Flip();
+                        flip.init({
+                                target:span010000[0],
+                                start:start,
+                                move:move
+                            });
+                        var dim={
+                            width:null,
+                            height:null
+                        };
+                        var pos={
+                            left:null,
+                            top:null
+                        };
+                        function start(e){
+                            dim.height=parseInt(ele.css('height'));
+                            pos.top=parseInt(ele.css('top'));
+                            prevent(e);
+                            stop(e);
+                        }
+                        function move(e){
+                            var height=dim.height-e._y;
+                            var top=pos.top+e._y;
+                            ele.css({
+                                height: height+'px',
+                                top:top+'px'
+                            });
+                        }
+                    }
+                    function cropper001000(){
+                        var flip=new Flip();
+                        flip.init({
+                                target:span001000[0],
+                                start:start,
+                                move:move
+                            });
+                        var dim={
+                            width:null,
+                            height:null
+                        };
+                        var pos={
+                            left:null,
+                            top:null
+                        };
+                        function start(e){
+                            dim.width=parseInt(ele.css('width'));
+                            dim.height=parseInt(ele.css('height'));
+                            pos.left=parseInt(ele.css('left'));
+                            pos.top=parseInt(ele.css('top'));
+                            console.log(dim,pos)
+                            prevent(e);
+                            stop(e);
+                        }
+                        function move(e){
+                            var width=dim.width+e._x,
+                                height=dim.height-e._y;
+                            var top=pos.top+e._y;
+                            ele.css({
+                                width: width+'px',
+                                height: height+'px',
+                                top:top+'px'
+                            });
+                        }
+                        
+                    }
+                    function cropper000100(){
+                        var flip=new Flip();
+                        flip.init({
+                                target:span000100[0],
+                                start:start,
+                                move:move
+                            });
+                        var dim={
+                            width:null,
+                            height:null
+                        };
+                        var pos={
+                            left:null,
+                            top:null
+                        };
+                        function start(e){
+                            dim.width=parseInt(ele.css('width'));
+                            dim.height=parseInt(ele.css('height'));
+                            pos.left=parseInt(ele.css('left'));
+                            pos.top=parseInt(ele.css('top'));
+                            console.log(dim,pos)
+                            prevent(e);
+                            stop(e);
+                        }
+                        function move(e){
+                            var width=dim.width-e._x,
+                                height=dim.height+e._y;
+                            var left=pos.left+e._x;
+                            ele.css({
+                                width: width+'px',
+                                height: height+'px',
+                                left:left+'px'
+                            });
+                        }
+                        
+                    }
+                    function cropper000010(){
+                         var flip=new Flip();
+                        flip.init({
+                                target:span000010[0],
+                                start:start,
+                                move:move
+                            });
+                        var dim={
+                            width:null,
+                            height:null
+                        };
+                        var pos={
+                            left:null,
+                            top:null
+                        };
+                        function start(e){
+                            dim.width=parseInt(ele.css('width'));
+                            dim.height=parseInt(ele.css('height'));
+                            pos.left=parseInt(ele.css('left'));
+                            pos.top=parseInt(ele.css('top'));
+                            console.log(dim,pos)
+                            prevent(e);
+                            stop(e);
+                        }
+                        function move(e){
+                            var height=dim.height+e._y;
+                            ele.css({
+                                height:height+'px'
+                            });
+                        }
+                        
+                    }
+                    function cropper000001(){
+                         var flip=new Flip();
+                        flip.init({
+                                target:span000001[0],
+                                start:start,
+                                move:move
+                            });
+                        var dim={
+                            width:null,
+                            height:null
+                        };
+                        var pos={
+                            left:null,
+                            top:null
+                        };
+                        function start(e){
+                            dim.width=parseInt(ele.css('width'));
+                            dim.height=parseInt(ele.css('height'));
+                            pos.left=parseInt(ele.css('left'));
+                            pos.top=parseInt(ele.css('top'));
+                            console.log(dim,pos)
+                            prevent(e);
+                            stop(e);
+                        }
+                        function move(e){
+                            var width=dim.width+e._x,
+                                height=dim.height+e._y;
+                            ele.css({
+                                width: width+'px',
+                                height: height+'px'
+                            });
+                        }
+                        
+                    }
                     function addAnimation(effectName){
                         $('.active').addClass(effectName);
                     }
@@ -112,12 +350,168 @@
                     function closeAnimationLayer(){
                         animationOperate.addClass('hide');
                         stageNav.removeClass('hide');
-                        console.log(stageNav)
                     }
 
                     function delActive(){
                         $('.active').remove();
                         closeAnimation.trigger('tap');
+                    }
+
+                    function sometime(e){
+                        if(!this.classList.contains('active')){
+                            return;
+                        }
+                        updateStartPos(e);
+                        updateNowPos();
+                        ele.on('touchmove',drag);
+                        ele.on('touchend',drop);
+                    }
+
+                    function drag(e){
+                        updateMovePos(e);
+                        updateDelta();
+                        setPos();
+
+
+                    }
+                    function drop(){
+                        ele.off('touchmove',drag);
+                        ele.off('touchend',drop);
+                    }
+                    function updateStartPos(e){
+                        pos.start.x=e.touches[0].pageX;
+                        pos.start.y=e.touches[0].pageY;
+                    }
+                    function updateMovePos(e){
+                        pos.move.x=e.touches[0].pageX;
+                        pos.move.y=e.touches[0].pageY;
+                    }
+                    function updateNowPos(){
+                        pos.now.left=parseInt(ele.css('left'));
+                        pos.now.top=parseInt(ele.css('top'));
+                    }
+                    function updateDelta(){
+                        pos.delta.x=pos.move.x-pos.start.x;
+                        pos.delta.y=pos.move.y-pos.start.y;
+                    }
+                    function setPos(){
+                        ele.css({
+                                'left':pos.now.left+pos.delta.x+'px',
+                                'top':pos.now.top+pos.delta.y+'px',
+                            });
+                    }
+                    function prevent(e){
+                        e.preventDefault();
+                    }
+                    function stop(e){
+                        e.stopPropagation();
+                    }
+
+                    function Flip(){
+                        var step=20,
+                        target=null,
+                        touch={},
+                        hasDefault,sensitivity,
+                        supportTouch='ontouchstart' in window,
+                        S=supportTouch?'touchstart':'mousedown',
+                        M=supportTouch?'touchmove':'mousemove',
+                        E=supportTouch?'touchend':'mouseup',
+                        cb={
+                          start:null,
+                          move:null,
+                          end:null,
+                          left:null,
+                          right:null,
+                          up:null,
+                          down:null
+                        },
+                        container=document,
+                        _dir=[];
+                        function swipeDirection(x1,x2,y1,y2,sensitivity) {
+                            var _x=Math.abs(x1-x2),
+                                _y=Math.abs(y1-y2),
+                                dir=_x>=_y?(x1-x2>0?'left':'right'):(y1-y2>0?'up':'down');
+                            if(sensitivity){
+                                if(dir=='left'||dir=='right'){
+                                    if((_y/_x)>sensitivity){dir='';}
+                                }else if(dir=='up'||dir=='down'){
+                                    if((_x/_y)>sensitivity){dir='';}
+                                }
+                            }
+
+                            return dir;
+                        }
+                        function _start(e){
+                            var pos=(e.touches&&e.touches[0])||e;
+                            touch.x1=pos.pageX;
+                            touch.y1=pos.pageY;
+                            e.x=touch.x1;
+                            e.y=touch.y1;
+                            typeof cb.start==='function'&&cb.start(e);
+                            container.addEventListener(M,_move,false);
+                            container.addEventListener(E,_end,false);
+                        }
+                        function _move(e){
+                            var pos=(e.touches&&e.touches[0])||e;
+                            touch.x2=pos.pageX;
+                            touch.y2 = pos.pageY;
+                            e.x=touch.x2;
+                            e.y=touch.y2;
+                            e._x=e.x-touch.x1;
+                            e._y=e.y-touch.y1;
+                            if(!hasDefault){e.preventDefault();}
+                            typeof cb.move==='function'&&cb.move(e);
+                        }
+                        function _end(e){
+                            e.x=touch.x2;
+                            e.y=touch.y2;
+                            e._x=e.x-touch.x1;
+                            e._y=e.y-touch.y1;
+                            if((touch.x2&&Math.abs(touch.x1-touch.x2)>step)||(touch.y2&&Math.abs(touch.y1-touch.y2)>step)){
+                                var dir_=swipeDirection(touch.x1,touch.x2,touch.y1,touch.y2,sensitivity);
+                                typeof cb[dir_] === 'function'&&cb[dir_](e);
+                            }
+                            typeof cb.end==='function'&&cb.end(e);
+                            container.removeEventListener(M,_move,false);
+                            container.removeEventListener(E,_end,false);
+                        }
+                        function flip(el,hasDefault, sensitivity) {
+                            if(!el)return;
+                            el.addEventListener(S,_start,false);
+                        }
+                        function flipRevoke(el) {
+                            if(!el){return;}
+                            el.removeEventListener(S,_start,false);
+                            el.removeEventListener(M,_move,false);
+                            el.removeEventListener(E,_end,false);
+                        }
+
+
+                        function render(target,hasDefault,sensitivity){
+                            flip(target,hasDefault,sensitivity);
+                        }
+
+                        return {
+                          target:null,
+                          conf:{},
+                          init:function(opts){
+                              container=opts.container||document;                       
+                              this.target=target=opts.target;
+                              step=opts.step||step;
+                              sensitivity=opts.sensitivity||sensitivity;
+                              var dir=['up','down','left','right','start','move','end'],l=dir.length;
+                              while(l--){
+                                if(opts[dir[l]]){
+                                  cb[dir[l]]=opts[dir[l]];
+                                  _dir.push(dir[l]);
+                                }
+                              }
+                              render(target,opts.hasDefault,sensitivity);
+                          },
+                          cancel:function(){
+                              flipRevoke(target);
+                          }
+                        }
                     }
                 }
         }
