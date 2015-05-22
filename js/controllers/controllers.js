@@ -14,7 +14,7 @@
         controller('makeController',['$scope','$routeParams','magaProvider','$rootScope','magasProvider','$http',makeController]).
         controller('musicController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider','$http',musicController]).
         controller('textController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',textController]).
-        controller('lotteryController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',lotteryController]).
+        controller('lotteryController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider','$http',lotteryController]).
         controller('hyperLinkController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',hyperLinkController]);
     //控制器的统一定义
     //选择模板页面控制器    
@@ -28,7 +28,7 @@
             });
         $scope.modelId=null;//用户选择的模板编号
         $scope.show=function(id,name){//弹出对话框
-            $('.inputName').removeClass('hide');
+            $('.inputName').removeClass('hide').addClass("sZoom");
             $scope.modelId=id;
             $scope.modelName=name;
         };
@@ -102,7 +102,7 @@
     }
 
     //涂抹页面控制器
-    function lotteryController($scope,$routeParams,magaProvider,$window,$rootScope){
+    function lotteryController($scope,$routeParams,magaProvider,$window,$rootScope,magasProvider,$http){
         //点击返回
         $scope.back=function(){
             $window.history.back();
@@ -119,6 +119,23 @@
 			$scope.act=n;	
 		}
 		$scope.getthis=getthis;
+		
+		$scope.effects=null;
+        $http({
+                method:'GET',
+                url:'model/lottery.json'
+            }).
+            success(function(data){
+                $scope.effects=data;
+				$scope.this_effects = $scope.effects[0].name;
+        });
+		
+
+		
+		$scope.choose=function(index){
+			$scope.this_effects=$scope.effects[index].name;
+			$scope.show = false;
+		}
 		
     }
 

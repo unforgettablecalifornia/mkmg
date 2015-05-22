@@ -17,7 +17,7 @@
             restrict:'A',
             link:function(scope,ele,attrs){
                 ele=$(ele[0]).find('.s-edit-btn');
-                var width=ele.children().children().width(),
+                var width=ele.children().children().width()+10,
                     wrapperWidth=width*7,
                     touchPos={
                     startX:0,

@@ -10,40 +10,24 @@
         <div>
             <div class="daub-title">覆盖特效</div>
             <div class="daub-r">
-                <div class="daub-name">细沙</div>
+                <div class="daub-name" ng-bind="this_effects"></div>
                 <div class="daub-img"  ng-click="show=!show" ng-class="{fan: show}">
                     <img src="img/img05.jpg">
                 </div>
             </div>
             <div class="daub-img-list" ng-show="show">
                 <ul>
-                    <li>
-                        <img src="img/img05.jpg">
-                        <span>模糊</span>
-                    </li>
-                    <li>
-                        <img src="img/img05.jpg">
-                        <span>模糊</span>
-                    </li>
-                    <li>
-                        <img src="img/img05.jpg">
-                        <span>模糊</span>
-                    </li>
-                    <li>
-                        <img src="img/img05.jpg">
-                        <span>模糊</span>
-                    </li>
-                    <li>
-                        <img src="img/img05.jpg">
-                        <span>模糊</span>
-                    </li>
+                    <li ng-repeat="data in effects" ng-click="choose($index)">
+                        <img ng-src="{{data.src}}">
+                        <span>{{data.name}}</span>
+                    </li> 
                 </ul>
             </div>
         </div>
         <div>
             <div class="daub-title">涂抹比例</div>
             <div class="daub-r">
-                <span ng-repeat="i in column" ng-click="getthis($index)" ng-class="{active: act==$index}">{{i}}</span>
+                <span ng-repeat="i in column" ng-click="getthis($index)" ng-init="getthis(0)" ng-class="{active: act==$index}">{{i}}</span>
             </div>
         </div>
         <div>

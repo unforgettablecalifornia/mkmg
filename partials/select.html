@@ -12,8 +12,11 @@
                 </a>
             </div>
     </section>
-    <div class="hide inputName center">
-        <input ng-model="magazineName">
-        <a ng-href="#/make/{{modelId}}" ng-click="make(modelId,modelName,magazineName)"><span>确定</span></a>
+    <div class="hide inputName">
+    	<div class="layer-bj"></div>
+        <div class="layer">
+       	  <input ng-model="magazineName" class="layer-text">
+       	  <a ng-href="#/make/{{modelId}}" ng-click="make(modelId,modelName,magazineName)" class="sub_link"><span>确定</span></a>
+        </div>
     </div>
 </header>
