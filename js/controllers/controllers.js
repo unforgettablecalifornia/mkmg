@@ -37,21 +37,46 @@
             magaProvider.modelId=modelId;//模板编号放入当前杂志服务
             magaProvider.modleName=modelName;
             magaProvider.magazineName=magazineName;
-            magasProvider.add();//增加一个杂志
+            var newMaga=new magaProvider;
+            magasProvider.addMaga(newMaga);//增加一个杂志
             $(window).off('touchmove.scroll',$scope.controller);
         };
     }
 
     //制作页面控制器
     function makeController($scope,$routeParams,magaProvider,$rootScope,magasProvider,$http){
+        // console.log(magasProvider)
+        // magasProvider.listen();
+        
+        var newMaga=magasProvider.getNewMaga();
+        $scope.pages=newMaga.pages;
+        $scope.active=newMaga.active;
+        $scope.$watchCollection('imgs',
+            function(newVal,oldVal,scope){
+                // console.log(newVal);
+                // console.log(oldVal);
+                // console.log(scope);
+            });
         $scope.modelName=magaProvider.modelName;
         $scope.modelId=magaProvider.modelId;
+        $scope.copyPage=function(){
+            $scope.pages.splice($scope.active+1,0,$scope.pages[$scope.active]);
+            $scope.active++;
+            newMaga.active++;
+            console.log($scope.pages);
+        }
         $http({
                 method:'GET',
                 url:'model/page/page.json'
             }).
             success(function(data){
-                        $scope.imgs=data;//制作页面读取远程数据
+                        if(!newMaga.pages[0]){//制作页面读取远程数据,生成第一页
+                            $scope.pages[0]=data;
+                            newMaga.pages[0]=data;
+                            $scope.active=0;
+                            newMaga.active=0;
+                        }
+                
                 });
         $scope.swift=magaProvider.swift;//功能菜单的切换
         $scope.control=function(){

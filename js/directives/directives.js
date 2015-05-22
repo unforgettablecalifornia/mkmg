@@ -228,7 +228,6 @@
                             dim.height=parseInt(ele.css('height'));
                             pos.left=parseInt(ele.css('left'));
                             pos.top=parseInt(ele.css('top'));
-                            console.log(dim,pos)
                             prevent(e);
                             stop(e);
                         }
@@ -265,7 +264,6 @@
                             dim.height=parseInt(ele.css('height'));
                             pos.left=parseInt(ele.css('left'));
                             pos.top=parseInt(ele.css('top'));
-                            console.log(dim,pos)
                             prevent(e);
                             stop(e);
                         }
@@ -302,7 +300,6 @@
                             dim.height=parseInt(ele.css('height'));
                             pos.left=parseInt(ele.css('left'));
                             pos.top=parseInt(ele.css('top'));
-                            console.log(dim,pos)
                             prevent(e);
                             stop(e);
                         }
@@ -335,7 +332,6 @@
                             dim.height=parseInt(ele.css('height'));
                             pos.left=parseInt(ele.css('left'));
                             pos.top=parseInt(ele.css('top'));
-                            console.log(dim,pos)
                             prevent(e);
                             stop(e);
                         }
@@ -626,7 +622,8 @@
                     var disX=ev.targetTouches[0].pageX - obj1.position().left;
                     var disY=ev.targetTouches[0].pageY - obj1.position().top;
     
-                    $(document).on("touchmove",function(ev){    
+                    $(document).on("touchmove",drag);
+                    function drag(ev){    
                         var l=ev.targetTouches[0].pageX-disX;   
                         if(l<0)
                         {
@@ -640,11 +637,12 @@
                         var sacle=l/(obj2.width() - obj1.width());
                         obj3.html(parseInt(sacle * scope.info));
                         }
-                    );
-                    $(document).on("touchend",function(){
-                        obj1.off("touchstart");
+                    $(document).on("touchend",drop);
+                    function drop(){
+                        $(document).off("touchmove",drag);
+                        $(document).off("touchend",drop);
                         
-                    });
+                    }
                     ev.preventDefault();    
                     
                 });

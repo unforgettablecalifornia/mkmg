@@ -8,8 +8,12 @@
 <section class="stage_bj">
 	<div class="stage-box">
     	<div class="stage">
-        <div class="page">
-        	<div class="s-img" ng-repeat="img in imgs" x-cropper-directive style="left:{{img.style.left}}px; top:{{img.style.top}}px;">
+        <!-- <div class="page">
+            <div class="s-img" ng-repeat="img in pages[active].imgs" x-cropper-directive style="left:{{img.style.left}}px; top:{{img.style.top}}px;">
+            <img ng-src="{{img.src}}">
+        </div> -->
+        <div class="page" ng-repeat="page in pages track by $index">
+            <div class="s-img" ng-repeat="img in page.imgs" x-cropper-directive style="left:{{img.style.left}}px; top:{{img.style.top}}px;">
             <img ng-src="{{img.src}}">
         </div>
     </div>
@@ -20,7 +24,7 @@
         <div ng-class="{'s-c-b-list':true,hide:!swift}">
             <div class="s-n-box">
                 <div>
-                    <span>
+                    <span ng-click="copyPage()">
                         <em class="copy"></em>
                         复制
                     </span>

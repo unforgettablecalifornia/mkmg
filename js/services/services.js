@@ -13,9 +13,10 @@
     function magaProvider(){
         return {
             $get:function(){
-                return {
-                    swift:true,
-                    texts:[]
+                return function(){
+                    return {
+                        pages:[]
+                    }
                 };
             }
         }
@@ -27,10 +28,15 @@
                 return {
                     swift:true,
                     magaList:[],
-                    add:function(){
-                        this.magaList.push({
-                                id:_.uniqueId('maga_')
-                            });
+                    addMaga:function(newMaga){
+                        newMaga.id=_.uniqueId('maga_');
+                        this.magaList.push(newMaga);
+                    },
+                    getNewMaga:function(){
+                        return this.magaList[this.magaList.length-1];
+                    },
+                    listen:function($scope){
+                        window.aaa=$scope;
                     }
                 };
             }
