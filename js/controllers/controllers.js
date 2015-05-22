@@ -1,13 +1,10 @@
 'use strict';
 ;(function(root,factory){
-    //显性的指明依赖
     var _=window._;
     var $=window.$;
     var angular=window.angular;
-    //运行工厂且传入依赖
     factory.call(root,angular,_,$);
-}(this,function(angular){//工厂的定义
-    //定义一个angular模块，专门存放控制器
+}(this,function(angular){
     var appControllers=angular.module('appControllers',[]);
     appControllers.
         controller('selectController',['$scope','$routeParams','magaProvider','$rootScope','magasProvider','$http',selectController]).
@@ -16,7 +13,6 @@
         controller('textController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',textController]).
         controller('lotteryController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider','$http',lotteryController]).
         controller('hyperLinkController',['$scope','$routeParams','magaProvider','$window','$rootScope','magasProvider',hyperLinkController]);
-    //控制器的统一定义
     //选择模板页面控制器    
     function selectController($scope,$routeParams,magaProvider,$rootScope,magasProvider,$http){
         $http({
@@ -27,10 +23,14 @@
                 $scope.elements=data;//远程读取页面数据
             });
         $scope.modelId=null;//用户选择的模板编号
+        $scope.controller=function(){
+            return false;
+        }
         $scope.show=function(id,name){//弹出对话框
             $('.inputName').removeClass('hide').addClass("sZoom");
             $scope.modelId=id;
             $scope.modelName=name;
+            $(window).on('touchmove.scroll',$scope.controller);
         };
         $scope.make=function(modelId,modelName,magazineName){
             //用户从对话框进入下个页面
@@ -38,6 +38,7 @@
             magaProvider.modleName=modelName;
             magaProvider.magazineName=magazineName;
             magasProvider.add();//增加一个杂志
+            $(window).off('touchmove.scroll',$scope.controller);
         };
     }
 

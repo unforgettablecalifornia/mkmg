@@ -67,6 +67,7 @@
             transclude:true,
             link:function(scope,ele,attrs){
                     var ele=$(ele[0]),
+                        stage_bj=$('.stage_bj')[0],
                         closeAnimation=$('.clear-animation'),//清除动画按钮
                         animationOperate=$('.animation-operate'),//动画编辑浮层
                         stageNav=$('.stage-nav'),//导航浮层
@@ -115,8 +116,8 @@
                             rotationBtn.on('tap',addAnimation.bind(ele,'at-rotation'));
                             shakeBtn.on('tap',addAnimation.bind(ele,'at-shake'));
                             // $(document).on('contextmenu',controll);
-                            $(window).on('touchmove.scroll',controll);
-                            $(window).on('scroll.scroll',controll);
+                            $('.stage_bj').on('touchmove.scroll',controll);
+                            $('.stage_bj').on('scroll.scroll',controll);
                         }
                         ele.on('longTap',showCropperLayer);
                         ele.find('.anim').on('tap',showAnimationLayer);
@@ -143,6 +144,7 @@
                         flip.init({
                                 target:span100000[0],
                                 start:start,
+                                container:stage_bj,
                                 move:move
                             });
                         var dim={
@@ -179,6 +181,7 @@
                         flip.init({
                                 target:span010000[0],
                                 start:start,
+                                container:stage_bj,
                                 move:move
                             });
                         var dim={
@@ -209,6 +212,7 @@
                         flip.init({
                                 target:span001000[0],
                                 start:start,
+                                container:stage_bj,
                                 move:move
                             });
                         var dim={
@@ -245,6 +249,7 @@
                         flip.init({
                                 target:span000100[0],
                                 start:start,
+                                container:stage_bj,
                                 move:move
                             });
                         var dim={
@@ -281,6 +286,7 @@
                         flip.init({
                                 target:span000010[0],
                                 start:start,
+                                container:stage_bj,
                                 move:move
                             });
                         var dim={
@@ -313,6 +319,7 @@
                         flip.init({
                                 target:span000001[0],
                                 start:start,
+                                container:stage_bj,
                                 move:move
                             });
                         var dim={
