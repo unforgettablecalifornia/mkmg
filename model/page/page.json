@@ -2,20 +2,20 @@
     "imgs":[{
         "src": "img/img03.jpg",
         "style": {
-            "left": "10",
-            "top": "20"
+            "left": "10px",
+            "top": "20px"
         }
     }, {
         "src": "img/img02.jpg",
         "style": {
-            "left": "10",
-            "top": "173"
+            "left": "10px",
+            "top": "173px"
         }
     }, {
         "src": "img/img02.jpg",
         "style": {
-            "left": "10",
-            "top": "335"
+            "left": "10px",
+            "top": "335px"
         }
     }]
 }

@@ -63,7 +63,6 @@
             $scope.pages.splice($scope.active+1,0,$scope.pages[$scope.active]);
             $scope.active++;
             newMaga.active++;
-            console.log($scope.pages);
         }
         $http({
                 method:'GET',
@@ -71,10 +70,10 @@
             }).
             success(function(data){
                         if(!newMaga.pages[0]){//制作页面读取远程数据,生成第一页
-                            $scope.pages[0]=data;
-                            newMaga.pages[0]=data;
+                            $scope.pages[0]=newMaga.pages[0]=data;
                             $scope.active=0;
                             newMaga.active=0;
+
                         }
                 
                 });

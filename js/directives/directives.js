@@ -59,9 +59,9 @@
     //图片截取指令
     function cropperDirective(){
         return {
-            scope:{
-                pos:'@'
-            },
+            // scope:{
+            //     pos:'@'
+            // },
             restrict:'A',
             templateUrl:'partials/cropper.html',
             transclude:true,
@@ -129,15 +129,21 @@
                         cropper000010();
                         cropper000001();
                     }
-                    function cancell(){
-                        var imgs=ele.find('img');
-                        imgs.on('touchstart',controll);
-                        imgs.on('touchmove',controll);
-                        imgs.on('touchend',controll);
-                        imgs.on('contextmenu',controll);
-                    }
+                    // function cancell(){
+                    //     var imgs=ele.find('img');
+                    //     imgs.on('touchstart',controll);
+                    //     imgs.on('touchmove',controll);
+                    //     imgs.on('touchend',controll);
+                    //     imgs.on('contextmenu',controll);
+                    // }
                     function controll(){
                         return false;
+                    }
+                    function sync(left,top,width,height){
+                            scope.img.style.left=left+'px';
+                            scope.img.style.top=top+'px';
+                            scope.img.style.width=width+'px';
+                            scope.img.style.height=height+'px';
                     }
                     function cropper100000(){
                         var flip=new Flip();
@@ -174,6 +180,8 @@
                                 left:left+'px',
                                 top:top+'px'
                             });
+                            sync(left,top,width,height);
+                            
                         }
                     }
                     function cropper010000(){
@@ -205,6 +213,7 @@
                                 height: height+'px',
                                 top:top+'px'
                             });
+                            sync(left,top,width,height);
                         }
                     }
                     function cropper001000(){
@@ -240,6 +249,7 @@
                                 height: height+'px',
                                 top:top+'px'
                             });
+                            sync(left,top,width,height);
                         }
                         
                     }
@@ -276,6 +286,7 @@
                                 height: height+'px',
                                 left:left+'px'
                             });
+                            sync(left,top,width,height);
                         }
                         
                     }
@@ -308,6 +319,7 @@
                             ele.css({
                                 height:height+'px'
                             });
+                            sync(left,top,width,height);
                         }
                         
                     }
@@ -342,6 +354,7 @@
                                 width: width+'px',
                                 height: height+'px'
                             });
+                            sync(left,top,width,height);
                         }
                         
                     }
@@ -412,10 +425,14 @@
                         pos.delta.y=pos.move.y-pos.start.y;
                     }
                     function setPos(){
+                        var left=pos.now.left+pos.delta.x+'px';
+                        var top=pos.now.top+pos.delta.y+'px';
                         ele.css({
-                                'left':pos.now.left+pos.delta.x+'px',
-                                'top':pos.now.top+pos.delta.y+'px',
+                                'left':left,
+                                'top':top,
                             });
+                        scope.img.style.left=left;
+                        scope.img.style.top=top;
                     }
                     function prevent(e){
                         e.preventDefault();
@@ -645,8 +662,7 @@
                     }
                     ev.preventDefault();    
                     
-                });
-                
+                });  
             },
         }   
     }
