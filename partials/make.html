@@ -7,12 +7,12 @@
 </header>
 <section class="stage_bj">
 	<div class="stage-box">
-    	<div class="stage">
+    	<div class="stage" x-common-directive>
         <!-- <div class="page">
             <div class="s-img" ng-repeat="img in pages[active].imgs" x-cropper-directive style="left:{{img.style.left}}px; top:{{img.style.top}}px;">
             <img ng-src="{{img.src}}">
         </div> -->
-        <div class="page cut" ng-repeat="page in pages track by $index" ng-show="$index === active">
+        <div class="page cut" ng-repeat="page in pages track by $index" ng-show="$index === active" ng-class="{lottery:lottery}" x-lottery-directive>
             <div class="s-img" ng-repeat="img in page.imgs" x-cropper-directive style="left:{{img.style.left}}; top:{{img.style.top}}; width:{{img.style.width}}; height:{{img.style.height}};">
             <img ng-src="{{img.src}}">
         </div>
