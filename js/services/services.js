@@ -128,32 +128,37 @@
                         var moveEvtName = device? 'touchmove': 'mousemove';
                         if (!device) {
                             var isMouseDown = false;
-                            _this.conNode.addEventListener('mouseup', function(e) {
-                                e.preventDefault();
-
-                                isMouseDown = false;
-                                var per = _this.getTransparentPercent(_this.maskCtx, _this.width, _this.height);
-
-                                if(per>=_this.scale){
-                                    // 执行回调函数
-                                    if(typeof(_this.drawPercentCallback)=='function') _this.drawPercentCallback();
-                                }
-                            }, false);
+                            _this.conNode.addEventListener('mouseup', up, false);
                         } else {
-                            _this.conNode.addEventListener("touchmove", function(e) {
+                            _this.conNode.addEventListener("touchmove", move, false);
+                            _this.conNode.addEventListener('touchend', end, false);
+
+                        }
+                        function up(e) {
+                            e.preventDefault();
+
+                            isMouseDown = false;
+                            var per = _this.getTransparentPercent(_this.maskCtx, _this.width, _this.height);
+
+                            if(per>=_this.scale){
+                                // 执行回调函数
+                                if(typeof(_this.drawPercentCallback)=='function') _this.drawPercentCallback();
+                            }
+                        }
+                        function move(e) {
                                 if (isMouseDown) {
                                     e.preventDefault();
                                 }
                                 if (e.cancelable) { e.preventDefault(); }else{window.event.returnValue = false;}
-                            }, false);
-                            _this.conNode.addEventListener('touchend', function(e) {
-                                isMouseDown = false;
-                                var per = _this.getTransparentPercent(_this.maskCtx, _this.width, _this.height);
-                                if(per>=_this.scale){
-                                    // 执行回调函数
-                                    if(typeof(_this.drawPercentCallback)=='function') _this.drawPercentCallback();
-                                }
-                            }, false);
+                            }
+
+                        function end(e) {
+                            isMouseDown = false;
+                            var per = _this.getTransparentPercent(_this.maskCtx, _this.width, _this.height);
+                            if(per>=_this.scale){
+                                // 执行回调函数
+                                if(typeof(_this.drawPercentCallback)=='function') _this.drawPercentCallback(_this.conNode,move,end);
+                            }
                         }
 
                         // move事件来画点
