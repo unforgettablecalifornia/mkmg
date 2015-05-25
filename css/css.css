@@ -188,7 +188,7 @@ body { min-width:320px; max-width:670px; margin:0 auto;font-family:"黑体"; bac
 left:50%; top:50%; margin-left:-6rem; margin-top:-2.5rem; z-index:9999999999;}
 .layer-text { background:none; width:80%; margin-left:10%; height:1.5rem; border:none; border-bottom:1px solid #e5e5e5; font-size:.6rem; color:#c9c8cd; margin-top:.5rem;}
 .layer .sub_link { display:inline-block; width:3rem; height:1.5rem; line-height:1.5rem; color:#fc3077; text-align:center; font-size:.8rem; margin-top:.5rem; margin-left:calc(50% - 1.5rem)}
-.sZoom .layer { -webkit-animation: DivZoom 0.5s ease-in-out;}
+.sZoom .layer ,.cut{ -webkit-animation: DivZoom 0.5s ease-in-out;}
 @-webkit-keyframes DivZoom
 {
 0% { -webkit-transform: scale(0.01) }
@@ -206,3 +206,4 @@ left:50%; top:50%; margin-left:-6rem; margin-top:-2.5rem; z-index:9999999999;}
 .active .cropper{
     display: -webkit-box;
 }
+/**{ pointer-events: none; }*/

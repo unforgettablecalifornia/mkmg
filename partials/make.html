@@ -12,7 +12,7 @@
             <div class="s-img" ng-repeat="img in pages[active].imgs" x-cropper-directive style="left:{{img.style.left}}px; top:{{img.style.top}}px;">
             <img ng-src="{{img.src}}">
         </div> -->
-        <div class="page" ng-repeat="page in pages track by $index" ng-show="$index === active">
+        <div class="page cut" ng-repeat="page in pages track by $index" ng-show="$index === active">
             <div class="s-img" ng-repeat="img in page.imgs" x-cropper-directive style="left:{{img.style.left}}; top:{{img.style.top}}; width:{{img.style.width}}; height:{{img.style.height}};">
             <img ng-src="{{img.src}}">
         </div>
@@ -30,7 +30,7 @@
                     </span>
                 </div>
                 <div>
-                    <span>
+                    <span ng-click="deletePage()">
                         <em class="del"></em>
                         删除
                     </span>
@@ -68,7 +68,7 @@
                     </a>
                 </div>
                 <div>
-                    <span>
+                    <span ng-click="addPage()">
                         <em class="add_page"></em>
                         加页
                     </span>

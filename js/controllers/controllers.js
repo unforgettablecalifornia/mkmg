@@ -64,6 +64,17 @@
             $scope.active++;
             newMaga.active++;
         }
+        $scope.deletePage=function(){
+            $scope.pages.splice($scope.active,1);
+            if($scope.active===$scope.pages.length){
+                $scope.active--;
+                newMaga.active--;
+            }
+        }
+        $scope.addPage=function(){
+            newMaga.addPage();
+            $scope.active=newMaga.active;
+        }
         $http({
                 method:'GET',
                 url:'model/page/page.json'

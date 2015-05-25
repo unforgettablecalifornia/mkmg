@@ -15,7 +15,14 @@
             $get:function(){
                 return function(){
                     return {
-                        pages:[]
+                        pages:[],
+                        addPage:function(){
+                            console.log(this)
+                            this.pages.splice(this.active+1,0,{
+                                    'imgs':[]
+                                })
+                            this.active++;
+                        }
                     }
                 };
             }
