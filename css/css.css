@@ -29,7 +29,7 @@ body { min-width:320px; max-width:670px; margin:0 auto;font-family:"黑体"; bac
 .stage_bj {background:#747669 url(../img/bj.jpg) no-repeat; overflow:hidden; position:absolute; width:100%;  height:-webkit-calc(100% - (2.725rem + 2rem));}
 .stage-box { box-sizing:border-box;  padding:0.9rem; width:100%; height:100%; position:absolute;}
 .stage {background:#fff;-webkit-box-shadow:1px 1px 10px #333;width:100%; height:100%;overflow: hidden;}
-.stage .page { position:relative; width:100%; height:100%; }
+.stage .page { position:relative; width:100%; height:100%; display: none;}
 .stage .s-img { width:95%; height:30%; position:absolute;}
 .stage .s-img img { width:100%; height:100%;}
 .Line_frame { position:absolute; left:-1px; top:-1px; border:1px solid #000; width:100%; height:100%;}
@@ -108,7 +108,7 @@ body { min-width:320px; max-width:670px; margin:0 auto;font-family:"黑体"; bac
 .edit_text_nav span { display:inline-block; width:30px; height:1.4rem; background:url(../img/ico11.png) center no-repeat; background-size:40%; }
 
 /*动画导航按钮列表*/
-.animation-operate { width:100%; height:6.725rem; position:absolute; left:0; bottom:0; background:rgba(0,0,0,0.7);}
+.animation-operate { width:100%; height:6.725rem; position:absolute; left:0; bottom:0; background:rgba(0,0,0,0.7);z-index: 10000;}
 .animation-parameters {width:100%; height:4rem;}
 .animation-parameters .item { height:2rem; line-height:2rem;display:-webkit-box;}
 .animation-parameters .title { width:4rem; height:2rem; color:#fff; font-size:.6rem; text-align:center;}
@@ -206,4 +206,7 @@ left:50%; top:50%; margin-left:-6rem; margin-top:-2.5rem; z-index:9999999999;}
 .active .cropper{
     display: -webkit-box;
 }
-/**{ pointer-events: none; }*/
+/*页面显示*/
+.stage .current{
+    display: block;
+}

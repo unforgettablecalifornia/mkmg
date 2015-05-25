@@ -123,11 +123,11 @@
                         if(!closeAnimation.data('only')){
                             closeAnimation.data('only', true);
                             closeAnimation.on('tap',closeAnimationLayer);
-                            fadeInBtn.on('tap',addAnimation.bind(ele,'at-fadeIn'));
-                            fadeOutBtn.on('tap',addAnimation.bind(ele,'at-fadeOut'));
-                            amplifyBtn.on('tap',addAnimation.bind(ele,'at-amplify'));
-                            rotationBtn.on('tap',addAnimation.bind(ele,'at-rotation'));
-                            shakeBtn.on('tap',addAnimation.bind(ele,'at-shake'));
+                            fadeInBtn.on('tap',addAnimation.bind(ele,'fadeIn'));
+                            fadeOutBtn.on('tap',addAnimation.bind(ele,'fadeOut'));
+                            amplifyBtn.on('tap',addAnimation.bind(ele,'zoomIn'));
+                            rotationBtn.on('tap',addAnimation.bind(ele,'rotateIn'));
+                            shakeBtn.on('tap',addAnimation.bind(ele,'ring'));
                             // $(document).on('contextmenu',controll);
                             $('.stage_bj').on('touchmove.scroll',controll);
                             $('.stage_bj').on('scroll.scroll',controll);
@@ -371,7 +371,12 @@
                         
                     }
                     function addAnimation(effectName){
-                        $('.active').addClass(effectName);
+                        var active=$('.current .active');
+                        var classList=['fadeIn','fadeOut','zoomIn','rotateIn','ring'];
+                        classList.forEach(function(item,index,classList){
+                                active.removeClass(item);
+                            });
+                        active.addClass(effectName);
                     }
                     function showCropperLayer(){
                         var parent=ele.parent();
@@ -458,7 +463,12 @@
     // 拖拽设置值指令
     function dragSetDirective(){
         return {
-            scope:{},
+            scope:{
+                'defaultx':'=',
+                'big':'=',
+                'unit':'@'
+            },
+            templateUrl:'partials/dragSet.html',
             link:function(scope,ele,attrs){
                 var ele=$(ele[0]),
                     setLine=ele.find('.set-line'),
@@ -466,6 +476,7 @@
                     setLineWidth=setLine.width(),
                     eleWidth=ele.width(),
                     values=ele.find('.values span'),
+                    big=scope.big,
                     pos={
                         startX:0,
                         moveX:0,
@@ -478,6 +489,7 @@
                 function sometime(e){
                     ele.on('touchmove',drag);
                     ele.on('touchend',drop);
+                    setLineWidth=setLine.width()
                     var now=parseInt(setBtn.css('left'));
                     pos.now=now;
                     pos.startX=e.touches[0].pageX;
@@ -492,10 +504,10 @@
                     }else if(value>setLineWidth){
                         value=setLineWidth;
                     }
-                    setBtn.css({
-                            'left':value+'px'
+                    scope.$apply(function(){
+                            scope.defaultx=value;
                         });
-                    values.html(parseFloat(value/setLineWidth*10).toFixed(1));
+                    values.html(parseFloat(value/setLineWidth*big).toFixed(1));
                 }
 
                 function drop(e){
@@ -577,128 +589,23 @@
             require:'^commonDirective',
             restrict:'A',
             link:function(scope,element,attrs){
-                var target=element[0],
-                    dim=getComputedStyle(target,false),
-                    width=parseInt(dim.width),
-                    height=parseInt(dim.height),
-                    Lottery=scope.Lottery,
-                    lottery=new Lottery(target,'img/img05.jpg','image',width,height,cb,60);
-                lottery.init();
-                function cb(wrapper,move,end){
-                    wrapper.removeChild(wrapper.querySelector('.lottery'));
-                    lottery=null;
-                    wrapper.removeEventListener('touchmove',move);
-                    wrapper.removeEventListener('touchend',end);
-                }
+                _.delay(function(){
+                    var target=element[0],
+                        dim=getComputedStyle(target,false),
+                        width=parseInt(dim.width),
+                        height=parseInt(dim.height),
+                        Lottery=scope.Lottery,
+                        lottery=new Lottery(target,'img/img05.jpg','image',width,height,cb,60);
+                    lottery.init();
+                    
+                    function cb(wrapper,move,end){
+                        wrapper.removeChild(wrapper.querySelector('.lottery'));
+                        lottery=null;
+                        wrapper.removeEventListener('touchmove',move);
+                        wrapper.removeEventListener('touchend',end);
+                    }
+                },100);
             }   
         }
     }
 }));
-
-
-                    // function Flip(){
-                    //     var step=20,
-                    //     target=null,
-                    //     touch={},
-                    //     hasDefault,sensitivity,
-                    //     supportTouch='ontouchstart' in window,
-                    //     S=supportTouch?'touchstart':'mousedown',
-                    //     M=supportTouch?'touchmove':'mousemove',
-                    //     E=supportTouch?'touchend':'mouseup',
-                    //     cb={
-                    //       start:null,
-                    //       move:null,
-                    //       end:null,
-                    //       left:null,
-                    //       right:null,
-                    //       up:null,
-                    //       down:null
-                    //     },
-                    //     container=document,
-                    //     _dir=[];
-                    //     function swipeDirection(x1,x2,y1,y2,sensitivity) {
-                    //         var _x=Math.abs(x1-x2),
-                    //             _y=Math.abs(y1-y2),
-                    //             dir=_x>=_y?(x1-x2>0?'left':'right'):(y1-y2>0?'up':'down');
-                    //         if(sensitivity){
-                    //             if(dir=='left'||dir=='right'){
-                    //                 if((_y/_x)>sensitivity){dir='';}
-                    //             }else if(dir=='up'||dir=='down'){
-                    //                 if((_x/_y)>sensitivity){dir='';}
-                    //             }
-                    //         }
-
-                    //         return dir;
-                    //     }
-                    //     function _start(e){
-                    //         var pos=(e.touches&&e.touches[0])||e;
-                    //         touch.x1=pos.pageX;
-                    //         touch.y1=pos.pageY;
-                    //         e.x=touch.x1;
-                    //         e.y=touch.y1;
-                    //         typeof cb.start==='function'&&cb.start(e);
-                    //         container.addEventListener(M,_move,false);
-                    //         container.addEventListener(E,_end,false);
-                    //     }
-                    //     function _move(e){
-                    //         var pos=(e.touches&&e.touches[0])||e;
-                    //         touch.x2=pos.pageX;
-                    //         touch.y2 = pos.pageY;
-                    //         e.x=touch.x2;
-                    //         e.y=touch.y2;
-                    //         e._x=e.x-touch.x1;
-                    //         e._y=e.y-touch.y1;
-                    //         if(!hasDefault){e.preventDefault();}
-                    //         typeof cb.move==='function'&&cb.move(e);
-                    //     }
-                    //     function _end(e){
-                    //         e.x=touch.x2;
-                    //         e.y=touch.y2;
-                    //         e._x=e.x-touch.x1;
-                    //         e._y=e.y-touch.y1;
-                    //         if((touch.x2&&Math.abs(touch.x1-touch.x2)>step)||(touch.y2&&Math.abs(touch.y1-touch.y2)>step)){
-                    //             var dir_=swipeDirection(touch.x1,touch.x2,touch.y1,touch.y2,sensitivity);
-                    //             typeof cb[dir_] === 'function'&&cb[dir_](e);
-                    //         }
-                    //         typeof cb.end==='function'&&cb.end(e);
-                    //         container.removeEventListener(M,_move,false);
-                    //         container.removeEventListener(E,_end,false);
-                    //     }
-                    //     function flip(el,hasDefault, sensitivity) {
-                    //         if(!el)return;
-                    //         el.addEventListener(S,_start,false);
-                    //     }
-                    //     function flipRevoke(el) {
-                    //         if(!el){return;}
-                    //         el.removeEventListener(S,_start,false);
-                    //         el.removeEventListener(M,_move,false);
-                    //         el.removeEventListener(E,_end,false);
-                    //     }
-
-
-                    //     function render(target,hasDefault,sensitivity){
-                    //         flip(target,hasDefault,sensitivity);
-                    //     }
-
-                    //     return {
-                    //       target:null,
-                    //       conf:{},
-                    //       init:function(opts){
-                    //           container=opts.container||document;                       
-                    //           this.target=target=opts.target;
-                    //           step=opts.step||step;
-                    //           sensitivity=opts.sensitivity||sensitivity;
-                    //           var dir=['up','down','left','right','start','move','end'],l=dir.length;
-                    //           while(l--){
-                    //             if(opts[dir[l]]){
-                    //               cb[dir[l]]=opts[dir[l]];
-                    //               _dir.push(dir[l]);
-                    //             }
-                    //           }
-                    //           render(target,opts.hasDefault,sensitivity);
-                    //       },
-                    //       cancel:function(){
-                    //           flipRevoke(target);
-                    //       }
-                    //     }
-                    // }
