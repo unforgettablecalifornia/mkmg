@@ -529,7 +529,16 @@
                 btn_list.each(function(i){
                     $(this).on("tap",function(){ 
                     $(this).addClass("act").siblings().removeClass("act");
-                    area.eq(i).show().siblings().hide()
+						if(i==4)
+						{
+							area.hide();
+							$(".add_btn_link").show();
+						}else
+						{
+							area.eq(i).show().siblings().hide()
+							$(".add_btn_link").hide();
+						}
+                    
                   })
                 })
             }   
@@ -541,22 +550,31 @@
         return {
             restrict: 'E',
             replace: true,
-            scope: {
-                myId:"@",
-                info:"=",
-            },
-            template: '<div id="{{myId}}"><div class="set-line"><div class="set-btn"></div></div><div class="values"></div></div>',
+            template: ' <div>'+
+							'<div class="set-l">小</div>'+
+							'<div class="set-line">'+
+								'<div class="set-btn">'+
+									'<div class="values_box">'+
+										'<span class="values"></span>'+
+										'<span class="units"></span>'+
+									'</div>'+
+								'</div>'+
+							'</div>'+
+							'<div class="set-r">大</div>'+
+						'</div>',
+		
             link : function(scope,element,attr){
+ 
                 var element=$(element[0]);
                 var obj1 = element.find(".set-btn");
                 var obj2 = element.find(".set-line");
                 var obj3 = element.find(".values");
+				var obj4 = element.find(".units");
+				
                 obj1.on("touchstart",function(ev){
                     
                     var disX=ev.targetTouches[0].pageX - obj1.position().left;
-                    var disY=ev.targetTouches[0].pageY - obj1.position().top;
-    
-                    $(document).on("touchmove",drag);
+                    var disY=ev.targetTouches[0].pageY - obj1.position().top;  
                     function drag(ev){    
                         var l=ev.targetTouches[0].pageX-disX;   
                         if(l<0)
@@ -566,17 +584,24 @@
                         {
                             l = obj2.width() - obj1.width()
                         }
-                        obj1.css("left",l);
-                        
-                        var sacle=l/(obj2.width() - obj1.width());
-                        obj3.html(parseInt(sacle * scope.info));
-                        }
-                    $(document).on("touchend",drop);
+                        obj1.css("left",l); 
+						scope.sacle=l/(obj2.width() - obj1.width());
+						scope.$apply(attr.loaddatafn); 
+					 	scope.$apply(attr.fw); 
+						obj3.html(attr.fw);
+					
+						obj4.show();
+						 
+                    }
+                    
                     function drop(){
                         $(document).off("touchmove",drag);
                         $(document).off("touchend",drop);
                         
                     }
+					
+					$(document).on("touchmove",drag);
+					$(document).on("touchend",drop);
                     ev.preventDefault();    
                     
                 });  

@@ -1,4 +1,4 @@
-body { min-width:320px; max-width:670px; margin:0 auto;font-family:"黑体"; background:#f6f6f5;}
+body { margin:0 auto;font-family:"黑体"; background:#f6f6f5; overflow:hidden;}
 
 
 
@@ -116,8 +116,11 @@ body { min-width:320px; max-width:670px; margin:0 auto;font-family:"黑体"; bac
 .animation-parameters-set {-webkit-box-flex:1;}
 .animation-parameters-set .set-line { width:80%; position:relative; margin-top:.95rem; background:#d6d5d5; height:.1rem; float:left;}
 .animation-parameters-set .set-btn { width:.7rem; height:.7rem; background:#fa3174; border-radius:.7rem; position:absolute; top:-.27rem; left:0;}
-.animation-parameters-set .values { float:left;font-size:.6rem; color:#fa3174; margin-left:.5rem;line-height:2rem;}
+.animation-parameters-set .values_box {font-size:.6rem; color:#fa3174; margin:-.7rem 0 0 .7rem;}
+.animation-parameters-set .values {}
+.animation-parameters-set .units { display:none;}
 .animation-parameters-set .values span { font-style:normal;}
+.animation-parameters-set .set-l,.animation-parameters-set .set-r { width:10%; height:2rem; color:#fff; font-size:.7rem; text-align:center; line-height:2rem; float:left;}
 .animation-nav-btn {display:-webkit-box; color:#fff;}
 .animation-nav-btn em { display:block; font-size:.6rem;font-style:normal;}
 .clear-animation { width:3.5rem; height:2.725rem;  position:relative; text-align:center;}
@@ -145,14 +148,22 @@ body { min-width:320px; max-width:670px; margin:0 auto;font-family:"黑体"; bac
 
 
 /*添加按钮*/
+.edit_box {width:100%; height:2rem; position:relative; }
 .edit_text_box { width:100%; position:absolute; left:0; bottom:0;}
-.display_area { width:100%; height:2rem; background:rgba(0,0,0,0.8); position:absolute; top:-3.6rem; display:-webkit-box; display:none;}
-.display_area .animation-parameters-set { margin-left:10%;}
+.display_area {width:100%; height:2rem;  background:rgba(0,0,0,0.8); position:absolute; top:-1.6rem; display:none;}
+.display_area .animation-parameters-set {}
 .add_btn { text-align:center;font-size:.5rem; padding-top:2rem;} 
-.add_btn_text { width:100px; height:30px;  background:#b9bdc1; border-radius:.2rem; color:#73737a; border:none; padding-left:.3rem;}
+.add_btn_text { min-width:5rem; max-width:10rem; min-height:1.3rem; background:#b9bdc1; border-radius:.2rem; color:#73737a; border:none; padding-left:.3rem;
+}
 .add_btn_text::-webkit-input-placeholder {color: #73737a !important;}
-.add_btn_link { width:10rem; height:1.5rem; background:#fff; border:1px solid #cdcdcc;padding-left:.3rem; margin-top:1rem;}
-
+.add_btn_link { width:10rem; height:1.5rem; background:#fff; border:1px solid #cdcdcc;padding-left:.3rem; margin-top:1rem; display:none;}
+.text_align { display:-webkit-box;}
+.text_align div{ -webkit-box-flex:1; color:#fff; line-height:2rem; text-align:center; font-size:.7rem;}
+.bj_color_box {display:-webkit-box;}
+.bj_color { width:100%; height:1.2rem; margin-right:1rem; overflow:hidden; margin-top:.4rem; background:#f00;-webkit-box-flex:1; line-height:0; font-size:0;}
+.bj_color_name { width:20%; line-height:2rem; text-align:center; color:#fff; font-size:.7rem;}
+.bj_color div {  width:1rem; height:1.2rem; background:#fff; display:inline-block; }
+.bj_color_drag { width:1000px;}
 /*涂抹*/
 .daub { font-size:.8rem; line-height:2.3rem;}
 .daub > div { height:2.3rem; border-bottom:1px solid #aaaaaa; padding:.5rem; display:-webkit-box;}

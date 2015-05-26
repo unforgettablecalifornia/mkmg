@@ -8,7 +8,8 @@
 <section class="bg_f6f6f5">
     <div class="add_btn">
         <div>
-            <input type="text" placeholder="请输入文字" class="add_btn_text">
+            <textarea type="text" placeholder="请输入文字" class="add_btn_text" style="font-size:{{fontSize}}px; border-radius:{{radius}}px"  ></textarea>
+          	
         </div>
         <div>
             <input type="text" placeholder="http://www.5.cn/" class="add_btn_link">
@@ -19,33 +20,52 @@
     <div class="edit_text_box" btn>
         <div class="edit_box">
             <div class="display_area"> 	
+            	  <div class="bj_color_box">
+                      <div class="bj_color_name">颜色</div>
+                      <div class="bj_color" x-drag-x-directive>
+                        <div class="s-edit-btn" >
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>                    
+					  </div> 
+                  </div>
+            </div>
+            <div class="display_area"> 	
                     <div class="animation-parameters-set">
-                    <my-scroll info="color" ></my-scroll>
+                            <my-scroll ng-init="fontsize_min=12 ; fontsize_max=50;" loadDataFn="loadData1()" fw="0" tt=""></my-scroll>
+                    </div>	
+            </div>
+            <div class="display_area"> 	
+                    <div class="animation-parameters-set">
+                   
+                </div>  
+            </div>
+            <div class="display_area"> 	
+                <div class="animation-parameters-set">
+                    <my-scroll ng-init="radius_min=0 ; radius_max=20;" loadDataFn="loadData2()" fw="0" tt=""></my-scroll>
                 </div>  
             </div>
             <div class="display_area"> 	
                     <div class="animation-parameters-set">
-                    <my-scroll info="font_size" ></my-scroll>
-                </div>  
-            </div>
-            <div class="display_area"> 	
-                    <div class="animation-parameters-set">
-                    <my-scroll info="font_color" ></my-scroll>
-                </div>  
-            </div>
-            <div class="display_area"> 	
-                    <div class="animation-parameters-set">
-                    <my-scroll info="radius" ></my-scroll>
-                </div>  
-            </div>
-            <div class="display_area"> 	
-                    <div class="animation-parameters-set">
-                    <div class="set-line">
-                        <div class="set-btn"></div>
-                    </div>
-                    <div class="values">
-                        <span>3</span> S
-                    </div>
+                    
                 </div>  
             </div>
         </div>

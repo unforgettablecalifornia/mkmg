@@ -185,9 +185,26 @@
         $scope.yes=function(){
             // $scope.back();
         };
-		$scope.color = 30;
+	/*	$scope.color = 30;
 		$scope.font_size = 60;
 		$scope.font_color = 60;
-		$scope.radius = 20;
+		$scope.radius = 20;*/
+		
+		
+	 $scope.loadData1 = function(){
+
+		$scope.fontSize = parseInt($scope.sacle * $scope.fontsize_max + $scope.fontsize_min)  ;
+	    
+	
+    }
+	 $scope.loadData2 = function(){
+
+		$scope.radius = parseInt($scope.sacle * $scope.radius_max + $scope.radius_min)  ;
+		
+		
+		
+    }
+
+		
     }
 }));
