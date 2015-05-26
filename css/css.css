@@ -28,8 +28,8 @@ body { margin:0 auto;font-family:"黑体"; background:#f6f6f5; overflow:hidden;}
 /*编辑舞台*/
 .stage_bj {background:#747669 url(../img/bj.jpg) no-repeat; overflow:hidden; position:absolute; width:100%;  height:-webkit-calc(100% - (2.725rem + 2rem));}
 .stage-box { box-sizing:border-box;  padding:0.9rem; width:100%; height:100%; position:absolute;}
-.stage {background:#fff;-webkit-box-shadow:1px 1px 10px #333;width:100%; height:100%;overflow: hidden;}
-.stage .page { position:relative; width:100%; height:100%; display: none;}
+.stage {background:#fff;-webkit-box-shadow:1px 1px 10px #333;width:100%; height:100%;overflow: hidden;position: relative;}
+.stage .page { position:absolute; width:100%; height:100%; display: none;background-color: white;}
 .stage .s-img { width:95%; height:30%; position:absolute;}
 .stage .s-img img { width:100%; height:100%;}
 .Line_frame { position:absolute; left:-1px; top:-1px; border:1px solid #000; width:100%; height:100%;}
@@ -220,4 +220,30 @@ left:50%; top:50%; margin-left:-6rem; margin-top:-2.5rem; z-index:9999999999;}
 /*页面显示*/
 .stage .current{
     display: block;
+}
+/*tip*/
+.tip{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    color: white;
+    font-size: 16px;
+    background-color: #FA3174;
+    padding: 0px 10px;
+    line-height: 20px;
+}
+/*转场效果*/
+.front{
+    z-index: 111;
+}
+.back{
+    z-index: -111;
+}
+.stage .appear{
+    display: block;
+    z-index: 111;
+}
+.st{
+    -webkit-transition:all 300ms;
+    transition:all 300ms;
 }

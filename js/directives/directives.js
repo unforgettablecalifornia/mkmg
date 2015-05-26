@@ -1,24 +1,192 @@
 'use strict';
 ;(function(root,factory){
     var angular=window.angular;
+    var $=window.$;
+    var _=window._;
     var Math=window.Math;
-    factory.call(root,angular,Math);
-}(this,function(angular){
+    factory.call(root,angular,Math,$,_);
+}(this,function(angular,Math,$,_){
     angular.module('appDirectives',[]).
         directive('dragXDirective',dragXDirective).
         directive('cropperDirective',cropperDirective).
         directive('dragSetDirective',dragSetDirective).
         directive('commonDirective',commonDirective).
         directive('lotteryDirective',lotteryDirective).
+        directive('cutDirective',cutDirective).
 		directive('btn',btn).
         directive('myScroll',myScroll);
     //公用指令
     function commonDirective(){
         return {
             restrict:'A',
-            controller:function($scope,$element,$transclude,lotteryProvider,flipProvider){
+            controller:function($scope,$element,$transclude,lotteryProvider,flipProvider,magasProvider){
                 $scope.Lottery=lotteryProvider;
                 $scope.Flip=flipProvider;
+                $scope.magasProvider=magasProvider;
+            }   
+        }
+    }
+    //转场指令
+    function cutDirective(){
+        return {
+            require:'^commonDirective',
+            restrict:'A',
+            link:function(scope,ele,attrs){
+                ele=$(ele[0]);
+                var Flip=scope.Flip,
+                    newMaga=scope.magasProvider.getNewMaga(),
+                    pages=ele.find('.page'),
+                    cut={
+                        current:0,
+                        height:0
+                    },
+                    poly={
+                        style:document.createElement('div').style,
+                        vendor:function() {
+                                    var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
+                                        transform,
+                                        i = 0,
+                                        l = vendors.length;
+                            
+                                    for ( ; i < l; i++ ) {
+                                        transform = vendors[i] + 'ransform';
+                                        if ( transform in this.style ) return vendors[i].substr(0, vendors[i].length-1);
+                                    }
+                                    return false;
+                                },
+                        prefix:function (style) {
+                                    if ( this.vendor() === false ) return false;
+                                    if ( this.vendor() === '' ) return style;
+                                    return this.vendor() + style.charAt(0).toUpperCase() + style.substr(1);
+                                }
+                    },
+                    logic={
+                        next:0,
+                        now:0,
+                        up:function(){
+                            var now=cut.current-1;
+                            if(now<0)now=0;
+                            this.next=now;
+                            return pages.eq(now);
+                        },
+                        down:function(){
+                            var now=cut.current+1;
+                            if(now>(pages.length-1))now=pages.length-1;
+                            this.next=now;
+                            return pages.eq(now)
+                        },
+                        where:function(){
+                            var next=this.next;
+                            if(next==cut.current){
+                                
+                            }else if(next<cut.current){
+
+                                this.appear(pages.eq(next));
+                                this.transform(next);
+                                this.effect(next);
+
+                            }else if(next>cut.current){
+
+                                this.appear(pages.eq(next));
+                                this.transform(next);
+                                this.effect(next);
+
+                            }
+                        },
+                        current:function(){
+                            pages=ele.find('.page');
+                            pages.each(function(index,value){
+                                if(value.classList.contains('current')){
+                                    cut.current=index;
+                                }
+                            });
+                            pages.removeClass('cut');
+                            cut.height=ele.height();
+                            console.log(scope)
+                            
+                        },
+                        appear:function(who){
+                            who.addClass('appear');
+                        },
+                        transform:function(next){
+                            if(next<cut.current){
+                                var transform=poly.prefix('transform');
+                                pages.get(next).style[transform]='translate3d(0,-'+cut.height+'px,0)';
+                                pages.eq(next).addClass('st');
+                                logic.now=cut.current;
+                            }else if(next>cut.current){
+                                var transform=poly.prefix('transform');
+                                pages.get(next).style[transform]='translate3d(0,'+cut.height+'px,0)';
+                                pages.eq(next).addClass('st');
+                                logic.now=cut.current;
+                            }
+                        },
+                        effect:function(next){
+                            var _this=this;
+                            _.delay(function(){
+                                    pages.get(next).style[poly.prefix('transform')]='translate3d(0,0,0)';
+                                    _.delay(function(){
+                                        _this.build();
+                                    }, 300);
+                                },100);
+                        },
+                        build:function(){
+                            scope.state.active=logic.next;
+                            newMaga.active=logic.next;
+                            pages.eq(logic.now).removeClass('current');
+                            pages.eq(logic.next).addClass('current');
+                            pages.eq(logic.next).removeClass('appear');
+                            pages.eq(logic.next).removeClass('st');
+
+                        }
+                    },
+                    handler={
+                        start:function(){
+                            logic.current();
+                        },
+                        up:function(){
+                            logic.down();
+                            logic.where();
+                        },
+                        down:function(){
+                            logic.up();
+                            logic.where();
+                        }
+                    };
+                var flip=new Flip;
+                flip.init({
+                    target:ele[0],
+                    container:ele[0],
+                    start:handler.start,
+                    up:handler.up,
+                    down:handler.down
+                });
+            }
+        }
+    }
+    //涂抹效果
+    function lotteryDirective(){
+        return {
+            require:'^commonDirective',
+            restrict:'A',
+            link:function(scope,element,attrs){
+                return;
+                _.delay(function(){
+                    var target=element[0],
+                        dim=getComputedStyle(target,false),
+                        width=parseInt(dim.width),
+                        height=parseInt(dim.height),
+                        Lottery=scope.Lottery,
+                        lottery=new Lottery(target,'img/img05.jpg','image',width,height,cb,60);
+                    lottery.init();
+                    
+                    function cb(wrapper,move,end){
+                        wrapper.removeChild(wrapper.querySelector('.lottery'));
+                        lottery=null;
+                        wrapper.removeEventListener('touchmove',move);
+                        wrapper.removeEventListener('touchend',end);
+                    }
+                },100);
             }   
         }
     }
@@ -135,6 +303,7 @@
                         ele.on('longTap',showCropperLayer);
                         ele.find('.anim').on('tap',showAnimationLayer);
                         ele.find('.del').on('tap',delActive);
+                        ele.find('img').on('touchend',defaultAndPropagation);
                         cropper100000();
                         cropper010000();
                         cropper001000();
@@ -144,6 +313,10 @@
                     }
                     function controll(){
                         return false;
+                    }
+                    function defaultAndPropagation(e){
+                        e.preventDefault();
+                        e.stopPropagation();
                     }
                     function sync(left,top,width,height){
                             if(left!==undefined)scope.img.style.left=left+'px';
@@ -156,8 +329,9 @@
                         flip.init({
                                 target:span100000[0],
                                 start:start,
-                                container:stage_bj,
-                                move:move
+                                container:ele[0],
+                                move:move,
+                                end:end
                             });
                         var dim={
                             width:null,
@@ -176,6 +350,9 @@
                             stop(e);
                         }
                         function move(e){
+
+                            prevent(e);
+                            stop(e);
                             var width=dim.width-e._x,
                                 height=dim.height-e._y;
                             var left=pos.left+e._x,
@@ -189,14 +366,20 @@
                             sync(left,top,width,height);
                             
                         }
+                        function end(e){
+                            
+                            prevent(e);
+                            stop(e);
+                        }
                     }
                     function cropper010000(){
                         var flip=new Flip();
                         flip.init({
                                 target:span010000[0],
                                 start:start,
-                                container:stage_bj,
-                                move:move
+                                container:ele[0],
+                                move:move,
+                                end:end
                             });
                         var dim={
                             width:null,
@@ -213,6 +396,9 @@
                             stop(e);
                         }
                         function move(e){
+
+                            prevent(e);
+                            stop(e);
                             var height=dim.height-e._y;
                             var top=pos.top+e._y;
                             var left;
@@ -223,14 +409,20 @@
                             });
                             sync(left,top,width,height);
                         }
+                        function end(e){
+                            
+                            prevent(e);
+                            stop(e);
+                        }
                     }
                     function cropper001000(){
                         var flip=new Flip();
                         flip.init({
                                 target:span001000[0],
                                 start:start,
-                                container:stage_bj,
-                                move:move
+                                container:ele[0],
+                                move:move,
+                                end:end
                             });
                         var dim={
                             width:null,
@@ -249,6 +441,9 @@
                             stop(e);
                         }
                         function move(e){
+
+                            prevent(e);
+                            stop(e);
                             var width=dim.width+e._x,
                                 height=dim.height-e._y;
                             var top=pos.top+e._y;
@@ -260,6 +455,11 @@
                             });
                             sync(left,top,width,height);
                         }
+                        function end(e){
+                            
+                            prevent(e);
+                            stop(e);
+                        }
                         
                     }
                     function cropper000100(){
@@ -267,8 +467,9 @@
                         flip.init({
                                 target:span000100[0],
                                 start:start,
-                                container:stage_bj,
-                                move:move
+                                container:ele[0],
+                                move:move,
+                                end:end
                             });
                         var dim={
                             width:null,
@@ -287,6 +488,9 @@
                             stop(e);
                         }
                         function move(e){
+
+                            prevent(e);
+                            stop(e);
                             var width=dim.width-e._x,
                                 height=dim.height+e._y;
                             var left=pos.left+e._x;
@@ -298,6 +502,11 @@
                             });
                             sync(left,top,width,height);
                         }
+                        function end(e){
+                            
+                            prevent(e);
+                            stop(e);
+                        }
                         
                     }
                     function cropper000010(){
@@ -305,8 +514,9 @@
                         flip.init({
                                 target:span000010[0],
                                 start:start,
-                                container:stage_bj,
-                                move:move
+                                container:ele[0],
+                                move:move,
+                                end:end
                             });
                         var dim={
                             width:null,
@@ -325,11 +535,19 @@
                             stop(e);
                         }
                         function move(e){
+
+                            prevent(e);
+                            stop(e);
                             var height=dim.height+e._y;
                             ele.css({
                                 height:height+'px'
                             });
                             sync(left,top,width,height);
+                        }
+                        function end(e){
+                            
+                            prevent(e);
+                            stop(e);
                         }
                         
                     }
@@ -338,8 +556,9 @@
                         flip.init({
                                 target:span000001[0],
                                 start:start,
-                                container:stage_bj,
-                                move:move
+                                container:ele[0],
+                                move:move,
+                                end:end
                             });
                         var dim={
                             width:null,
@@ -358,6 +577,9 @@
                             stop(e);
                         }
                         function move(e){
+
+                            prevent(e);
+                            stop(e);
                             var width=dim.width+e._x,
                                 height=dim.height+e._y;
                             var left;
@@ -367,6 +589,11 @@
                                 height: height+'px'
                             });
                             sync(left,top,width,height);
+                        }
+                        function end(e){
+                            
+                            prevent(e);
+                            stop(e);
                         }
                         
                     }
@@ -386,6 +613,7 @@
                         scope.$apply(function(){
                             
                         });
+                        return false;
                     }
 
                     function showAnimationLayer(){
@@ -607,30 +835,5 @@
                 });  
             },
         }   
-    }
-    //涂抹效果
-    function lotteryDirective(){
-        return {
-            require:'^commonDirective',
-            restrict:'A',
-            link:function(scope,element,attrs){
-                _.delay(function(){
-                    var target=element[0],
-                        dim=getComputedStyle(target,false),
-                        width=parseInt(dim.width),
-                        height=parseInt(dim.height),
-                        Lottery=scope.Lottery,
-                        lottery=new Lottery(target,'img/img05.jpg','image',width,height,cb,60);
-                    lottery.init();
-                    
-                    function cb(wrapper,move,end){
-                        wrapper.removeChild(wrapper.querySelector('.lottery'));
-                        lottery=null;
-                        wrapper.removeEventListener('touchmove',move);
-                        wrapper.removeEventListener('touchend',end);
-                    }
-                },100);
-            }   
-        }
     }
 }));

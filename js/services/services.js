@@ -357,10 +357,13 @@
         return {
             $get:function(){
                 return function(){
-                        var step=20,
+                        var step=60,
                         target=null,
                         touch={},
-                        hasDefault,sensitivity,
+                        hasDefault,
+                        sensitivity=1,
+                        stepY=66,
+                        stepX=44,
                         supportTouch='ontouchstart' in window,
                         S=supportTouch?'touchstart':'mousedown',
                         M=supportTouch?'touchmove':'mousemove',
@@ -382,9 +385,9 @@
                                 dir=_x>=_y?(x1-x2>0?'left':'right'):(y1-y2>0?'up':'down');
                             if(sensitivity){
                                 if(dir=='left'||dir=='right'){
-                                    if((_y/_x)>sensitivity){dir='';}
+                                    if(((_y/_x)>sensitivity)||_x<stepX){dir='';}
                                 }else if(dir=='up'||dir=='down'){
-                                    if((_x/_y)>sensitivity){dir='';}
+                                    if(((_x/_y)>sensitivity)||_y<stepY){dir='';}
                                 }
                             }
 
@@ -423,6 +426,10 @@
                             typeof cb.end==='function'&&cb.end(e);
                             container.removeEventListener(M,_move,false);
                             container.removeEventListener(E,_end,false);
+                            touch.x1=null;
+                            touch.y1=null;
+                            touch.x2=null;
+                            touch.y2=null;
                         }
                         function flip(el,hasDefault, sensitivity) {
                             if(!el)return;
@@ -447,6 +454,8 @@
                               container=opts.container||document;                       
                               this.target=target=opts.target;
                               step=opts.step||step;
+                              stepX=opts.stepX||stepX;
+                              stepY=opts.stepY||stepY;
                               sensitivity=opts.sensitivity||sensitivity;
                               var dir=['up','down','left','right','start','move','end'],l=dir.length;
                               while(l--){

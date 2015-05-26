@@ -5,18 +5,15 @@
         <a href="javascript:;" class="a-r"><span>预览</span></a>
     </div>
 </header>
-<section class="stage_bj">
+<section class="stage_bj" x-common-directive>
 	<div class="stage-box">
-    	<div class="stage" x-common-directive>
-        <!-- <div class="page">
-            <div class="s-img" ng-repeat="img in pages[active].imgs" x-cropper-directive style="left:{{img.style.left}}px; top:{{img.style.top}}px;">
-            <img ng-src="{{img.src}}">
-        </div> -->
-        <div class="page cut" ng-repeat="page in pages track by $index" ng-class="{lottery:lottery,current:($index === active)}" x-lottery-directive>
+    	<div class="stage" x-cut-directive>
+        <div class="page cut" ng-repeat="page in pages track by $index" ng-class="{lottery:lottery,current:($index === state.active)}" x-lottery-directive>
             <div class="s-img" ng-repeat="img in page.imgs" x-cropper-directive style="left:{{img.style.left}}; top:{{img.style.top}}; width:{{img.style.width}}; height:{{img.style.height}};">
-            <img ng-src="{{img.src}}">
+                <img ng-src="{{img.src}}">
+            </div>
+            <span class="tip">{{($index+1)}}</span>
         </div>
-    </div>
 </section>
 <footer>
     <div class="stage-nav">

@@ -47,10 +47,11 @@
     function makeController($scope,$routeParams,magaProvider,$rootScope,magasProvider,$http){
         // console.log(magasProvider)
         // magasProvider.listen();
-        
+        console.log(magasProvider);
         var newMaga=magasProvider.getNewMaga();
         $scope.pages=newMaga.pages;
-        $scope.active=newMaga.active;
+        $scope.state={};
+        $scope.state.active=newMaga.active;
         $scope.$watchCollection('imgs',
             function(newVal,oldVal,scope){
                 // console.log(newVal);
@@ -60,20 +61,20 @@
         $scope.modelName=magaProvider.modelName;
         $scope.modelId=magaProvider.modelId;
         $scope.copyPage=function(){
-            $scope.pages.splice($scope.active+1,0,$scope.pages[$scope.active]);
-            $scope.active++;
+            $scope.pages.splice($scope.state.active+1,0,$scope.pages[$scope.state.active]);
+            $scope.state.active++;
             newMaga.active++;
         }
         $scope.deletePage=function(){
-            $scope.pages.splice($scope.active,1);
-            if($scope.active===$scope.pages.length){
-                $scope.active--;
+            $scope.pages.splice($scope.state.active,1);
+            if($scope.state.active===$scope.pages.length){
+                $scope.state.active--;
                 newMaga.active--;
             }
         }
         $scope.addPage=function(){
             newMaga.addPage();
-            $scope.active=newMaga.active;
+            $scope.state.active=newMaga.active;
         }
         $http({
                 method:'GET',
@@ -82,7 +83,7 @@
             success(function(data){
                         if(!newMaga.pages[0]){//制作页面读取远程数据,生成第一页
                             $scope.pages[0]=newMaga.pages[0]=data;
-                            $scope.active=0;
+                            $scope.state.active=0;
                             newMaga.active=0;
 
                         }
